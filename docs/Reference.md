@@ -41,6 +41,7 @@ while (true) {
 - `setCursor()` and `setPage()` replace each other.
 - `setCursor()` also accepts a full next-page URL.
 - `setCursor(null)` clears both.
+- `per_page` isn't sent with a cursor; the page size from the first request applies.
 
 ## Includes
 

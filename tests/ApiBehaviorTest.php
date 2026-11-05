@@ -71,6 +71,29 @@ class ApiBehaviorTest extends TestCase
         $this->assertSame($expectedUrl, strtok($response->getRequestUrl(), '?'));
     }
 
+    public function testPerPageIsNotSentWithCursor()
+    {
+        $client = FootballApi::transfers();
+        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+
+        $client->setPerPage(50)->setCursor('abc')->all();
+
+        parse_str((string) parse_url($response->getRequestUrl(), PHP_URL_QUERY), $query);
+        $this->assertSame('abc', $query['cursor']);
+        $this->assertArrayNotHasKey('per_page', $query);
+    }
+
+    public function testPerPageIsSentWithoutCursor()
+    {
+        $client = FootballApi::transfers();
+        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+
+        $client->setPerPage(50)->all();
+
+        parse_str((string) parse_url($response->getRequestUrl(), PHP_URL_QUERY), $query);
+        $this->assertSame('50', $query['per_page']);
+    }
+
     public function testHttpErrorIncludesSportmonksMessage()
     {
         $client = FootballApi::bookmakers();

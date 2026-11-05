@@ -48,9 +48,16 @@ class FootballClient {
 	 * @throws ApiRequestException
 	 */
 	protected function call(string $url) {
+		$query = $this->query;
+
+		// Sportmonks rejects per_page together with a cursor (HTTP 400);
+		if (isset($query['cursor'])) {
+			unset($query['per_page']);
+		}
+
 		try {
 			$response = $this->client->request('GET', $url, [
-				'query' => $this->query,
+				'query' => $query,
 				'headers' => ['Authorization' => $this->apiToken],
 			])->getContent();
 			return json_decode($response);

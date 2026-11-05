@@ -60,6 +60,8 @@ while (true) {
 }
 ```
 
+`per_page` is never sent with a cursor (Sportmonks rejects the combination); the first request's page size applies.
+
 ## Errors
 
 | Exception | When |
