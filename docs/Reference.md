@@ -99,7 +99,7 @@ $response = FootballApi::fixtures()->getByDateRange($dateFrom, $dateTo);
 $response = FootballApi::fixtures()->getByDateRangeForTeam($dateFrom, $dateTo, $teamId);
 $response = FootballApi::fixtures()->getHeadToHead($teamId1, $teamId2);
 $response = FootballApi::fixtures()->search($searchQuery);
-$response = FootballApi::fixtures()->getUpcommingByMarketId($marketId);
+$response = FootballApi::fixtures()->getUpcomingByMarketId($marketId);
 $response = FootballApi::fixtures()->getLastUpdated(); // recently updated fixtures
 ```
 
@@ -300,7 +300,7 @@ $response = FootballApi::bookmakers()->getByFixtureId($fixtureId);
 ```php
 $response = FootballApi::preMatchNews()->all();
 $response = FootballApi::preMatchNews()->getById($seasonId); // news for a season
-$response = FootballApi::preMatchNews()->upcommingFixtures();
+$response = FootballApi::preMatchNews()->upcomingFixtures();
 ```
 
 ### ⚔️ Rivals

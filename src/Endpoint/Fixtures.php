@@ -119,11 +119,10 @@ class Fixtures extends FootballClient {
 	 * @throws ApiRequestException
 	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-upcoming-fixtures-by-market-id
 	 */
-	public function getUpcommingByMarketId(int $marketId) {
+	public function getUpcomingByMarketId(int $marketId) {
 		$url = "fixtures/upcoming/markets/{$marketId}";
 		return $this->call($url);
 	}
-
 	/**
 	 * @return stdClass
 	 * @throws ApiRequestException

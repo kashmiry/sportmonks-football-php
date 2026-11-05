@@ -37,8 +37,7 @@ class PreMatchNews extends FootballClient {
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/news/get-pre-match-news-for-upcoming-fixtures
      */
-    public function upcommingFixtures() {
-        $url = "news/pre-match/upcomming";
+    public function upcomingFixtures() {
+        $url = "news/pre-match/upcoming";
         return $this->call($url);
-    }
-}
+    }}
