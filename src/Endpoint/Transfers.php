@@ -3,6 +3,7 @@
 namespace Sportmonks\Football\Endpoint;
 
 use Sportmonks\Football\Exception\ApiRequestException;
+use Sportmonks\Football\Exception\InvalidDateFormatException;
 use Sportmonks\Football\FootballApiHelper;
 use Sportmonks\Football\FootballClient;
 use stdClass;
@@ -16,6 +17,7 @@ class Transfers extends FootballClient {
 	/**
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/transfers/get-all-transfers
 	 */
 	public function all() {
 		$url = "transfers";
@@ -26,6 +28,7 @@ class Transfers extends FootballClient {
 	 * @param int $transferId
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/transfers/get-transfer-by-id
 	 */
 	public function getById(int $transferId) {
 		$url = "transfers/{$transferId}";
@@ -35,6 +38,7 @@ class Transfers extends FootballClient {
 	/**
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/transfers/get-latest-transfers
 	 */
 	public function latest() {
 		$url = "transfers/latest";
@@ -47,6 +51,7 @@ class Transfers extends FootballClient {
 	 * @return stdClass
 	 * @throws ApiRequestException
 	 * @throws InvalidDateFormatException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/transfers/get-transfers-between-date-range
 	 */
 	public function getByDateRange(string $dateFrom, string $dateTo) {
 		$dateFrom = FootballApiHelper::verifyDate($dateFrom);
@@ -59,6 +64,7 @@ class Transfers extends FootballClient {
 	 * @param int $teamId
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/transfers/get-transfers-by-team-id
 	 */
 	public function getByTeamId(int $teamId) {
 		$url = "transfers/teams/{$teamId}";
@@ -69,6 +75,7 @@ class Transfers extends FootballClient {
 	 * @param int $playerId
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/transfers/get-transfers-by-player-id
 	 */
 	public function getByPlayerId(int $playerId) {
 		$url = "transfers/players/{$playerId}";

@@ -17,6 +17,7 @@ class Filters extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/filters/get-all-entity-filters
      */
     public function allEntity() {
         $url = "filters/entity";

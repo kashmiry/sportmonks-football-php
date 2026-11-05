@@ -14,6 +14,7 @@ class Referees extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/referees/get-all-referees
      */
     public function all() {
         $url = "referees";
@@ -24,6 +25,7 @@ class Referees extends FootballClient {
      * @param int $refereeId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/referees/get-referee-by-id
      */
     public function getById(int $refereeId) {
         $url = "referees/{$refereeId}";
@@ -34,6 +36,7 @@ class Referees extends FootballClient {
      * @param int $countryId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/referees/get-referees-by-country-id
      */
     public function getByCountryId(int $countryId) {
         $url = "referees/countries/{$countryId}";
@@ -44,6 +47,7 @@ class Referees extends FootballClient {
      * @param int $seasonId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/referees/get-referees-by-season-id
      */
     public function getBySeasonId(int $seasonId) {
         $url = "referees/seasons/{$seasonId}";

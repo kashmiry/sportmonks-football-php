@@ -17,6 +17,7 @@ class Types extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/types/get-all-types
      */
     public function all() {
         $url = "types";
@@ -27,6 +28,7 @@ class Types extends FootballClient {
      * @param int $typeId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/types/get-type-by-id
      */
     public function getById(int $typeId) {
         $url = "types/{$typeId}";
@@ -36,6 +38,7 @@ class Types extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/types/get-type-by-entity
      */
     public function getByEntity() {
         $url = "types/entities";

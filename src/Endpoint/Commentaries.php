@@ -14,6 +14,7 @@ class Commentaries extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/commentaries/get-all-commentaries
      */
     public function all() {
         $url = "commentaries";
@@ -24,6 +25,7 @@ class Commentaries extends FootballClient {
      * @param int $fixtureId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/commentaries/get-commentaries-by-fixture-id
      */
     public function getByFixtureId(int $fixtureId) {
         $url = "commentaries/{$fixtureId}";

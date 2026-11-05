@@ -17,6 +17,7 @@ class Countries extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/countries/get-all-countries
      */
     public function all() {
         $url = "countries";
@@ -27,6 +28,7 @@ class Countries extends FootballClient {
      * @param int $countryId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/countries/get-country-by-id
      */
     public function getById(int $countryId) {
         $url = "countries/{$countryId}";
@@ -37,6 +39,7 @@ class Countries extends FootballClient {
      * @param string $searchQuery
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/countries/get-countries-by-search
      */
     public function search($searchQuery) {
         $url = "countries/search/{$searchQuery}";

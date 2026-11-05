@@ -15,6 +15,7 @@ class Livescores extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/livescores/get-all-livescores
      */
     public function all() {
         $url = "livescores";
@@ -24,6 +25,7 @@ class Livescores extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/livescores/get-inplay-livescores
      */
     public function inplay() {
         $url = "livescores/inplay";
@@ -33,6 +35,7 @@ class Livescores extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/livescores/get-latest-updated-livescores
      */
     public function latest() {
         $url = "livescores/latest";

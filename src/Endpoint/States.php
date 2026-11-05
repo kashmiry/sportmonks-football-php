@@ -14,6 +14,7 @@ class States extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/states/get-all-states
      */
     public function all() {
         $url = "states";
@@ -24,6 +25,7 @@ class States extends FootballClient {
      * @param int $stageId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/states/get-state-by-id
      */
     public function getById(int $stateId) {
         $url = "states/{$stateId}";

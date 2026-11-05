@@ -15,6 +15,7 @@ class Venues extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/venues/get-all-venues
      */
     public function all() {
         $url = "venues";
@@ -25,6 +26,7 @@ class Venues extends FootballClient {
      * @param int $venueId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/venues/get-venue-by-id
      */
     public function getById(int $venueId) {
         $url = "venues/{$venueId}";
@@ -35,6 +37,7 @@ class Venues extends FootballClient {
      * @param int $seasonId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/venues/get-venues-by-season-id
      */
     public function getBySeasonId(int $seasonId) {
         $url = "venues/seasons/{$seasonId}";
@@ -45,6 +48,7 @@ class Venues extends FootballClient {
      * @param string $searchQuery
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/venues/get-venues-by-search-by-name
      */
     public function search(string $searchQuery) {
         $url = "venues/search/{$searchQuery}";

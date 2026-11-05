@@ -16,6 +16,7 @@ class Schedules extends FootballClient {
      * @param int $seasonId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/schedules/get-schedules-by-season-id
      */
     public function getBySeasonId(int $seasonId) {
         $url = "schedules/seasons/{$seasonId}";
@@ -26,6 +27,7 @@ class Schedules extends FootballClient {
      * @param int $teamId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/schedules/get-schedules-by-team-id
      */
     public function getByTeamId(int $teamId) {
         $url = "schedules/teams/{$teamId}";
@@ -37,6 +39,7 @@ class Schedules extends FootballClient {
      * @param int $teamId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/schedules/get-schedules-by-season-id-and-team-id
      */
     public function getBySeasonAndTeamId(int $seasonId, int $teamId) {
         $url = "schedules/seasons/{$seasonId}teams/{$teamId}";

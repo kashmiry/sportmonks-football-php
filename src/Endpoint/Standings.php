@@ -14,6 +14,7 @@ class Standings extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standings/get-all-standings
      */
     public function all() {
         $url = "standings";
@@ -24,6 +25,7 @@ class Standings extends FootballClient {
      * @param int $seasonId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standings/get-standings-by-season-id
      */
     public function getBySeasonId(int $seasonId) {
         $url = "standings/seasons/{$seasonId}";
@@ -34,6 +36,7 @@ class Standings extends FootballClient {
      * @param int $roundId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standings/get-standings-by-round-id
      */
     public function getByRoundId(int $roundId) {
         $url = "standings/rounds/{$roundId}";
@@ -44,6 +47,7 @@ class Standings extends FootballClient {
      * @param int $seasonId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standings/get-standing-correction-by-season-id
      */
     public function getCorrectionsBySeasonId(int $seasonId) {
         $url = "standings/corrections/seasons/{$seasonId}";
@@ -54,6 +58,7 @@ class Standings extends FootballClient {
      * @param int $leagueId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standings/get-live-standings-by-league-id
      */
     public function getLiveByLeagueId(int $leagueId) {
         $url = "standings/live/leagues/{$leagueId}";

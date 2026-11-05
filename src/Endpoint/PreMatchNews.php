@@ -14,6 +14,7 @@ class PreMatchNews extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/news/get-pre-match-news
      */
     public function all() {
         $url = "news/pre-match";
@@ -24,6 +25,7 @@ class PreMatchNews extends FootballClient {
      * @param int $seasonId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/news/get-pre-match-news-by-season-id
      */
     public function getById(int $seasonId) {
         $url = "news/pre-match/seasons/{$seasonId}";
@@ -33,6 +35,7 @@ class PreMatchNews extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/news/get-pre-match-news-for-upcoming-fixtures
      */
     public function upcommingFixtures() {
         $url = "news/pre-match/upcomming";

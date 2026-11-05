@@ -14,6 +14,7 @@ class Predictions extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/predictions/get-probabilities
      */
     public function all() {
         $url = "predictions/probabilities";
@@ -24,6 +25,7 @@ class Predictions extends FootballClient {
      * @param int $leagueId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/predictions/get-predictability-by-league-id
      */
     public function getPredictabilityByLeagueId(int $leagueId) {
         $url = "predictions/probabilities/leagues/{$leagueId}";
@@ -34,6 +36,7 @@ class Predictions extends FootballClient {
      * @param int $fixtureId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/predictions/get-probabilities-by-fixture-id
      */
     public function getPredictabilityByFixtureId(int $fixtureId) {
         $url = "predictions/probabilities/fixtures/{$fixtureId}";
@@ -43,6 +46,7 @@ class Predictions extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/predictions/get-value-bets
      */
     public function valueBets() {
         $url = "predictions/value-bets/";

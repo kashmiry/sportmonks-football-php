@@ -17,6 +17,7 @@ class My extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/my-sportmonks/get-my-enrichments
      */
     public function enrichments() {
         $url = "enrichments";
@@ -26,6 +27,7 @@ class My extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/my-sportmonks/get-my-resources
      */
     public function resources() {
         $url = "resources";
@@ -35,6 +37,7 @@ class My extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/my-sportmonks/get-my-leagues
      */
     public function leagues() {
         $url = "leagues";

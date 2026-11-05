@@ -14,6 +14,7 @@ class Players extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/players/get-all-players
      */
     public function all() {
         $url = "players";
@@ -24,6 +25,7 @@ class Players extends FootballClient {
      * @param int $playerId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/players/get-player-by-id
      */
     public function getById(int $playerId) {
         $url = "players/{$playerId}";
@@ -34,6 +36,7 @@ class Players extends FootballClient {
      * @param int $countryId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/players/get-players-by-country-id
      */
     public function getByCountryId(int $countryId) {
         $url = "players/countries/{$countryId}";
@@ -44,6 +47,7 @@ class Players extends FootballClient {
      * @param string $searchQuery
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/players/get-players-by-search-by-name
      */
     public function search(string $searchQuery) {
         $url = "players/search/{$searchQuery}";
@@ -53,6 +57,7 @@ class Players extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/players/get-last-updated-players
      */
     public function getLastUpdated() {
         $url = "players/latest";

@@ -14,6 +14,7 @@ class InplayOdds extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standard-odds-feed/inplay-odds/get-all-inplay-odds
      */
     public function all() {
         $url = "odds/inplay";
@@ -24,6 +25,7 @@ class InplayOdds extends FootballClient {
      * @param int $fixtureId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standard-odds-feed/inplay-odds/get-inplay-odds-by-fixture-id
      */
     public function getByFixtureId(int $fixtureId) {
         $url = "odds/inplay/fixtures/{$fixtureId}";
@@ -35,6 +37,7 @@ class InplayOdds extends FootballClient {
      * @param int $bookmakerId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standard-odds-feed/inplay-odds/get-inplay-odds-by-fixture-id-and-bookmaker-id
      */
     public function getByFixtureAndBookmakerId(int $fixtureId, int $bookmakerId) {
         $url = "odds/inplay/fixtures/{$fixtureId}/bookmakers/{$bookmakerId}";
@@ -46,6 +49,7 @@ class InplayOdds extends FootballClient {
      * @param int $marketId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standard-odds-feed/inplay-odds/get-inplay-odds-by-fixture-id-and-market-id
      */
     public function getByFixtureAndMarketId(int $fixtureId, int $marketId) {
         $url = "odds/inplay/fixtures/{$fixtureId}/markets/{$marketId}";
@@ -55,6 +59,7 @@ class InplayOdds extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/standard-odds-feed/inplay-odds/get-last-updated-inplay-odds
      */
     public function getLastUpdated() {
         $url = "odds/inplay/latest";

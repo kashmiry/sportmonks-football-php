@@ -17,6 +17,7 @@ class Continents extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/continents/get-all-continents
      */
     public function all() {
         $url = "continents";
@@ -27,6 +28,7 @@ class Continents extends FootballClient {
      * @param int $continentId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/core-api/endpoints/continents/get-continent-by-id
      */
     public function getById(int $continentId) {
         $url = "continents/{$continentId}";

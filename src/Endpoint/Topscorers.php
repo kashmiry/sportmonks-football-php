@@ -16,6 +16,7 @@ class Topscorers extends FootballClient {
      * @param int $seasonId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/topscorers/get-topscorers-by-season-id
      */
     public function getBySeasonId(int $seasonId) {
         $url = "topscorers/seasons/{$seasonId}";
@@ -26,6 +27,7 @@ class Topscorers extends FootballClient {
      * @param int $stageId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/topscorers/get-topscorers-by-stage-id
      */
     public function getByStageId(int $stageId) {
         $url = "topscorers/stages/{$stageId}";

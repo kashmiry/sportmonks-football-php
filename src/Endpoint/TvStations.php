@@ -15,6 +15,7 @@ class TvStations extends FootballClient {
     /**
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/tv-stations/get-all-tv-stations
      */
     public function all() {
         $url = "tv-stations";
@@ -25,6 +26,7 @@ class TvStations extends FootballClient {
      * @param int $tvStationId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/tv-stations/get-tv-station-by-id
      */
     public function getById(int $tvStationId) {
         $url = "tv-stations/{$tvStationId}";
@@ -35,6 +37,7 @@ class TvStations extends FootballClient {
      * @param int $fixtureId
      * @return stdClass
      * @throws ApiRequestException
+     * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/tv-stations/get-tv-stations-by-fixture-id
      */
     public function getByFixtureId(int $fixtureId) {
         $url = "tv-stations/fixtures/{$fixtureId}";

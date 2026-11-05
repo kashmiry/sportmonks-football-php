@@ -3,6 +3,7 @@
 namespace Sportmonks\Football\Endpoint;
 
 use Sportmonks\Football\Exception\ApiRequestException;
+use Sportmonks\Football\Exception\InvalidDateFormatException;
 use Sportmonks\Football\FootballApiHelper;
 use Sportmonks\Football\FootballClient;
 use stdClass;
@@ -15,6 +16,7 @@ class Fixtures extends FootballClient {
 	/**
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-all-fixtures
 	 */
 	public function all() {
 		$url = "fixtures";
@@ -25,6 +27,7 @@ class Fixtures extends FootballClient {
 	 * @param int $fixtureId
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixture-by-id
 	 */
 	public function getById(int $fixtureId) {
 		$url = "fixtures/{$fixtureId}";
@@ -35,6 +38,7 @@ class Fixtures extends FootballClient {
 	 * @param array $fixtureIds
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixtures-by-multiple-ids
 	 */
 	public function getByMultipleIds(array $fixtureIds) {
 		$fixtureIds = implode(",", array_map("trim", array_filter($fixtureIds)));
@@ -47,6 +51,7 @@ class Fixtures extends FootballClient {
 	 * @return stdClass
 	 * @throws ApiRequestException
 	 * @throws InvalidDateFormatException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixtures-by-date
 	 */
 	public function getByDate(string $date) {
 		$date = FootballApiHelper::verifyDate($date);
@@ -60,6 +65,7 @@ class Fixtures extends FootballClient {
 	 * @return stdClass
 	 * @throws ApiRequestException
 	 * @throws InvalidDateFormatException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixtures-by-date-range
 	 */
 	public function getByDateRange(string $dateFrom, string $dateTo) {
 		$dateFrom = FootballApiHelper::verifyDate($dateFrom);
@@ -75,6 +81,7 @@ class Fixtures extends FootballClient {
 	 * @return stdClass
 	 * @throws ApiRequestException
 	 * @throws InvalidDateFormatException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixtures-by-date-range-for-team
 	 */
 	public function getByDateRangeForTeam(string $dateFrom, string $dateTo, int $teamId) {
 		$dateFrom = FootballApiHelper::verifyDate($dateFrom);
@@ -88,6 +95,7 @@ class Fixtures extends FootballClient {
 	 * @param int $teamId2
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixtures-by-head-to-head
 	 */
 	public function getHeadToHead(int $teamId1, int $teamId2) {
 		$url = "fixtures/head-to-head/{$teamId1}/{$teamId2}";
@@ -98,6 +106,7 @@ class Fixtures extends FootballClient {
 	 * @param string $searchQuery
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixtures-by-search-by-name
 	 */
 	public function search(string $searchQuery) {
 		$url = "fixtures/search/{$searchQuery}";
@@ -108,6 +117,7 @@ class Fixtures extends FootballClient {
 	 * @param int $marketId
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-upcoming-fixtures-by-market-id
 	 */
 	public function getUpcommingByMarketId(int $marketId) {
 		$url = "fixtures/upcoming/markets/{$marketId}";
@@ -117,6 +127,7 @@ class Fixtures extends FootballClient {
 	/**
 	 * @return stdClass
 	 * @throws ApiRequestException
+	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-latest-updated-fixtures
 	 */
 	public function getLastUpdated() {
 		$url = "fixtures/latest";
