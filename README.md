@@ -44,6 +44,18 @@ Each call returns the decoded JSON response, with results in `$response->data` a
 
 📖 See the [API reference](docs/Reference.md) for pagination, includes, filters, and all endpoints.
 
+## 🤖 AI Assistants
+
+The package ships an [agent skill](skills/sportmonks-football-php/SKILL.md) that teaches coding agents how to use this client:
+
+```bash
+npx skills add kashmiry/sportmonks-football-php
+```
+
+Or copy it manually: `vendor/kashmiry/sportmonks-football-php/skills/sportmonks-football-php` → `.agents/skills/`.
+
+Sportmonks also offers [AI docs and an MCP server](https://docs.sportmonks.com/v3/sportmonks-ai-docs) for exploring the API.
+
 ## 🤝 Contributing
 
 Contributions are welcome.
