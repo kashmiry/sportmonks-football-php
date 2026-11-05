@@ -42,7 +42,7 @@ class Schedules extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/schedules/get-schedules-by-season-id-and-team-id
      */
     public function getBySeasonAndTeamId(int $seasonId, int $teamId) {
-        $url = "schedules/seasons/{$seasonId}teams/{$teamId}";
+        $url = "schedules/seasons/{$seasonId}/teams/{$teamId}";
         return $this->call($url);
     }
 }

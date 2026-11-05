@@ -53,7 +53,7 @@ class Leagues extends FootballClient {
      */
     public function getByFixtureDate(string $date) {
         $date = FootballApiHelper::verifyDate($date);
-        $url = "leagues/fixtures/date/{$date}";
+        $url = "leagues/date/{$date}";
         return $this->call($url);
     }
 

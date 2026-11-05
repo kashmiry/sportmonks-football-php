@@ -37,6 +37,40 @@ class ApiBehaviorTest extends TestCase
         $this->assertStringEndsWith('/football/news/pre-match/upcoming', $response->getRequestUrl());
     }
 
+    public function documentedPaths(): array
+    {
+        $odds = 'https://api.sportmonks.com/v3/odds/';
+        $football = 'https://api.sportmonks.com/v3/football/';
+
+        return [
+            ['schedules', 'getBySeasonAndTeamId', [1, 2], $football . 'schedules/seasons/1/teams/2'],
+            ['commentaries', 'getByFixtureId', [1], $football . 'commentaries/fixtures/1'],
+            ['rivals', 'getById', [1], $football . 'rivals/teams/1'],
+            ['leagues', 'getByFixtureDate', ['2026-11-05'], $football . 'leagues/date/2026-11-05'],
+            ['predictions', 'getPredictabilityByLeagueId', [1], $football . 'predictions/predictability/leagues/1'],
+            ['bookmakers', 'all', [], $odds . 'bookmakers'],
+            ['bookmakers', 'getById', [1], $odds . 'bookmakers/1'],
+            ['bookmakers', 'search', ['bet'], $odds . 'bookmakers/search/bet'],
+            ['bookmakers', 'getByFixtureId', [1], $odds . 'bookmakers/fixtures/1'],
+            ['markets', 'all', [], $odds . 'markets'],
+            ['markets', 'getById', [1], $odds . 'markets/1'],
+            ['markets', 'search', ['goals'], $odds . 'markets/search/goals'],
+        ];
+    }
+
+    /**
+     * @dataProvider documentedPaths
+     */
+    public function testEndpointUsesDocumentedPath(string $endpoint, string $method, array $args, string $expectedUrl)
+    {
+        $client = FootballApi::$endpoint();
+        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+
+        $client->$method(...$args);
+
+        $this->assertSame($expectedUrl, strtok($response->getRequestUrl(), '?'));
+    }
+
     public function testHttpErrorIncludesSportmonksMessage()
     {
         $client = FootballApi::bookmakers();

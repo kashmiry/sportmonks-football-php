@@ -11,6 +11,9 @@ use stdClass;
  * @package Sportmonks\Football\Endpoint
  */
 class Markets extends FootballClient {
+
+    public $baseUri = 'https://api.sportmonks.com/v3/odds/';
+
     /**
      * @return stdClass
      * @throws ApiRequestException

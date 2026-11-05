@@ -28,7 +28,7 @@ class Predictions extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/predictions/get-predictability-by-league-id
      */
     public function getPredictabilityByLeagueId(int $leagueId) {
-        $url = "predictions/probabilities/leagues/{$leagueId}";
+        $url = "predictions/predictability/leagues/{$leagueId}";
         return $this->call($url);
     }
 

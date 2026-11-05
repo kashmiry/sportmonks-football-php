@@ -28,7 +28,7 @@ class Commentaries extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/commentaries/get-commentaries-by-fixture-id
      */
     public function getByFixtureId(int $fixtureId) {
-        $url = "commentaries/{$fixtureId}";
+        $url = "commentaries/fixtures/{$fixtureId}";
         return $this->call($url);
     }
 }

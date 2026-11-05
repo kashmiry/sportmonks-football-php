@@ -28,7 +28,7 @@ class Rivals extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/rivals/get-rivals-by-team-id
      */
     public function getById(int $teamId) {
-        $url = "teams/rivals/{$teamId}";
+        $url = "rivals/teams/{$teamId}";
         return $this->call($url);
     }
 }

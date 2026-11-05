@@ -11,6 +11,9 @@ use stdClass;
  * @package Sportmonks\Football\Endpoint
  */
 class Bookmakers extends FootballClient {
+
+    public $baseUri = 'https://api.sportmonks.com/v3/odds/';
+
     /**
      * @return stdClass
      * @throws ApiRequestException
@@ -50,7 +53,7 @@ class Bookmakers extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/bookmakers/get-bookmaker-by-fixture-id
      */
     public function getByFixtureId(int $fixtureId) {
-        $url = "bookmakers/fixtures{$fixtureId}";
+        $url = "bookmakers/fixtures/{$fixtureId}";
         return $this->call($url);
     }
 }
