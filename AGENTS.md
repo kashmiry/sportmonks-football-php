@@ -3,8 +3,8 @@
 ## Project
 
 PHP client for the Sportmonks Football API v3, published as `kashmiry/sportmonks-football-php`.
-Code must run on the minimum PHP version in `composer.json` (`require.php`). Avoid syntax newer than that,
-such as typed properties, union types, `match`, named arguments, nullsafe `?->`, enums, or `readonly`.
+Code must run on the minimum PHP version in `composer.json` (`require.php`); use modern syntax up to that version.
+Before finishing, run `composer test` and `composer analyse`. Both must pass.
 
 | Path | Purpose |
 | --- | --- |
@@ -27,7 +27,7 @@ Verify paths and parameters against the Sportmonks docs, never from memory.
 - **Don't break the public API.** To rename a method, add the new one and keep the old as a
   `@deprecated` alias.
 - **Tests stay offline.** Mock HTTP with `MockHttpClient` (see `tests/FootballClientAuthTest.php`).
-  Never use real API tokens.
+  Tests that need the network get `#[Group('network')]`. Never use real API tokens.
 - **Keep the token out of URLs.** It's sent in the `Authorization` header.
 - **Keep docs short.** README and Reference use emoji headings and minimal prose.
 - **Mark repository-only files `export-ignore`** in `.gitattributes`. `src/`, `docs/`, and `skills/` ship to users.

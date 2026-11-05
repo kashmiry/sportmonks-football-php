@@ -4,7 +4,7 @@ Actively maintained PHP client for the [Sportmonks Football API](https://docs.sp
 
 ## 📋 Requirements
 
-- PHP 7.3 or later
+- PHP 8.3 or later
 - A Sportmonks API token (your plan determines which endpoints you can call)
 - Sportmonks API v3
 

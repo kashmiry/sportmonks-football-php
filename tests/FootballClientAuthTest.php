@@ -18,7 +18,6 @@ class FootballClientAuthTest extends TestCase
     {
         $reflection = new ReflectionClass(FootballClient::class);
         $property = $reflection->getProperty('client');
-        $property->setAccessible(true);
         $property->setValue($client, new MockHttpClient($response, $client->baseUri));
 
         return $response;

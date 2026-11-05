@@ -2,6 +2,7 @@
 
 namespace Sportmonks\Test;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Sportmonks\Football\Exception\ApiRequestException;
@@ -21,7 +22,6 @@ class ApiBehaviorTest extends TestCase
     {
         $reflection = new ReflectionClass(FootballClient::class);
         $property = $reflection->getProperty('client');
-        $property->setAccessible(true);
         $property->setValue($client, new MockHttpClient($response, $client->baseUri));
 
         return $response;
@@ -37,7 +37,7 @@ class ApiBehaviorTest extends TestCase
         $this->assertStringEndsWith('/football/news/pre-match/upcoming', $response->getRequestUrl());
     }
 
-    public function documentedPaths(): array
+    public static function documentedPaths(): array
     {
         $odds = 'https://api.sportmonks.com/v3/odds/';
         $football = 'https://api.sportmonks.com/v3/football/';
@@ -58,9 +58,7 @@ class ApiBehaviorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider documentedPaths
-     */
+    #[DataProvider('documentedPaths')]
     public function testEndpointUsesDocumentedPath(string $endpoint, string $method, array $args, string $expectedUrl)
     {
         $client = FootballApi::$endpoint();
@@ -71,7 +69,7 @@ class ApiBehaviorTest extends TestCase
         $this->assertSame($expectedUrl, strtok($response->getRequestUrl(), '?'));
     }
 
-    public function searchTerms(): array
+    public static function searchTerms(): array
     {
         return [
             'space' => ['Real Madrid', 'Real%20Madrid'],
@@ -80,9 +78,7 @@ class ApiBehaviorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider searchTerms
-     */
+    #[DataProvider('searchTerms')]
     public function testSearchTermIsUrlEncoded(string $term, string $encoded)
     {
         $client = FootballApi::teams();

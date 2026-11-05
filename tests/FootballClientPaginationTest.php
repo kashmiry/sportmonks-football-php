@@ -12,14 +12,10 @@ class FootballClientPaginationTest extends TestCase
     {
         $reflection = new ReflectionClass($client);
         $property = $reflection->getProperty('query');
-        $property->setAccessible(true);
 
         return $property->getValue($client);
     }
 
-    /**
-     * @test
-     */
     public function testSetPageRemovesCursor()
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
@@ -32,9 +28,6 @@ class FootballClientPaginationTest extends TestCase
         $this->assertArrayNotHasKey('cursor', $query);
     }
 
-    /**
-     * @test
-     */
     public function testSetCursorRemovesPage()
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
@@ -47,9 +40,6 @@ class FootballClientPaginationTest extends TestCase
         $this->assertArrayNotHasKey('page', $query);
     }
 
-    /**
-     * @test
-     */
     public function testSetCursorExtractsTokenFromSportmonksCursorUrl()
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
@@ -61,9 +51,6 @@ class FootballClientPaginationTest extends TestCase
         $this->assertSame('abc', $query['cursor']);
     }
 
-    /**
-     * @test
-     */
     public function testSetCursorNullRemovesCursorAndPage()
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
