@@ -19,6 +19,8 @@ $response = FootballApi::fixtures()
     ->getByDate('2026-11-05');
 ```
 
+`per_page` accepts 1–50 (default 25).
+
 ### Cursor pagination
 
 ```php
@@ -67,6 +69,8 @@ $response = FootballApi::fixtures()
 $response = FootballApi::fixtures()->setFilters(['deleted'])->all();
 $response = FootballApi::fixtures()->setFilters(['populate'])->all();
 ```
+
+`populate` is for bulk loading: it allows up to 1,000 results per page but disables includes.
 
 > Parameters are passed to Sportmonks as-is. Check the [Sportmonks docs](https://docs.sportmonks.com/v3)
 > for the includes, filters, and page sizes each endpoint supports.

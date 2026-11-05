@@ -34,6 +34,7 @@ foreach ($response->data as $fixture) {
 - Each `FootballApi::...()` call returns a new client. Options never carry over between calls.
 - Calling `setIncludes()` or `setFilters()` again replaces the previous value.
 - Filters take `['name' => [ids]]` for entity filters or `['flag']` for flags such as `populate` and `deleted`.
+- `populate` allows up to 1,000 results per page but disables includes. Don't combine it with `setIncludes()`.
 - Dates must be `Y-m-d`.
 - Responses are decoded JSON (`stdClass`). Results are in `->data`; paging info is in `->pagination`.
 - Fetching one entity by ID (e.g. `fixtures()->getById($id)`) returns a single object in `->data`; everything
@@ -60,7 +61,8 @@ while (true) {
 }
 ```
 
-`per_page` is never sent with a cursor (Sportmonks rejects the combination); the first request's page size applies.
+- `per_page` accepts 1–50 (default 25).
+- `per_page` is never sent with a cursor (Sportmonks rejects the combination); the first request's page size applies.
 
 ## Errors
 
