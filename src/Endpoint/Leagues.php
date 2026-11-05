@@ -75,7 +75,7 @@ class Leagues extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/leagues/get-leagues-search-by-name
      */
     public function search(string $searchQuery) {
-        $url = "leagues/search/{$searchQuery}";
+        $url = "leagues/search/" . rawurlencode($searchQuery);
         return $this->call($url);
     }
 

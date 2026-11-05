@@ -42,7 +42,7 @@ class Bookmakers extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/bookmakers/get-bookmaker-by-search
      */
     public function search(string $searchQuery) {
-        $url = "bookmakers/search/{$searchQuery}";
+        $url = "bookmakers/search/" . rawurlencode($searchQuery);
         return $this->call($url);
     }
 

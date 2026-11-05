@@ -51,7 +51,7 @@ class Venues extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/venues/get-venues-by-search-by-name
      */
     public function search(string $searchQuery) {
-        $url = "venues/search/{$searchQuery}";
+        $url = "venues/search/" . rawurlencode($searchQuery);
         return $this->call($url);
     }
 }

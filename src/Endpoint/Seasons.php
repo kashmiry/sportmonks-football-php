@@ -50,7 +50,7 @@ class Seasons extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/seasons/get-seasons-by-search-by-name
      */
     public function search(string $searchQuery) {
-        $url = "seasons/search/{$searchQuery}";
+        $url = "seasons/search/" . rawurlencode($searchQuery);
         return $this->call($url);
     }
 }

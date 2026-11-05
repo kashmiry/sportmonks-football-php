@@ -42,7 +42,7 @@ class Markets extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/markets/get-market-by-search
      */
     public function search(string $searchQuery) {
-        $url = "markets/search/{$searchQuery}";
+        $url = "markets/search/" . rawurlencode($searchQuery);
         return $this->call($url);
     }
 }

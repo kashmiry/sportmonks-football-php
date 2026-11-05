@@ -71,6 +71,31 @@ class ApiBehaviorTest extends TestCase
         $this->assertSame($expectedUrl, strtok($response->getRequestUrl(), '?'));
     }
 
+    public function searchTerms(): array
+    {
+        return [
+            'space' => ['Real Madrid', 'Real%20Madrid'],
+            'reserved characters' => ['A/B?C#D', 'A%2FB%3FC%23D'],
+            'non-ASCII' => ['Atlético', 'Atl%C3%A9tico'],
+        ];
+    }
+
+    /**
+     * @dataProvider searchTerms
+     */
+    public function testSearchTermIsUrlEncoded(string $term, string $encoded)
+    {
+        $client = FootballApi::teams();
+        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+
+        $client->search($term);
+
+        $this->assertSame(
+            'https://api.sportmonks.com/v3/football/teams/search/' . $encoded,
+            strtok($response->getRequestUrl(), '?')
+        );
+    }
+
     public function testPerPageIsNotSentWithCursor()
     {
         $client = FootballApi::transfers();

@@ -109,7 +109,7 @@ class Fixtures extends FootballClient {
 	 * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixtures-by-search-by-name
 	 */
 	public function search(string $searchQuery) {
-		$url = "fixtures/search/{$searchQuery}";
+		$url = "fixtures/search/" . rawurlencode($searchQuery);
 		return $this->call($url);
 	}
 

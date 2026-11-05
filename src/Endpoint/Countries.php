@@ -42,7 +42,7 @@ class Countries extends FootballClient {
      * @link https://docs.sportmonks.com/v3/core-api/endpoints/countries/get-countries-by-search
      */
     public function search($searchQuery) {
-        $url = "countries/search/{$searchQuery}";
+        $url = "countries/search/" . rawurlencode((string) $searchQuery);
         return $this->call($url);
     }
 }

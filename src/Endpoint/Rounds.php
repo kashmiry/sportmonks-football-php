@@ -50,7 +50,7 @@ class Rounds extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/rounds/get-rounds-by-search-by-name
      */
     public function search(string $searchQuery) {
-        $url = "rounds/search/{$searchQuery}";
+        $url = "rounds/search/" . rawurlencode($searchQuery);
         return $this->call($url);
     }
 }

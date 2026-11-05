@@ -61,7 +61,7 @@ class Teams extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/teams/get-teams-by-search-by-name
      */
     public function search(string $searchQuery) {
-        $url = "teams/search/{$searchQuery}";
+        $url = "teams/search/" . rawurlencode($searchQuery);
         return $this->call($url);
     }
 }

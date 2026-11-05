@@ -42,7 +42,7 @@ class Cities extends FootballClient {
      * @link https://docs.sportmonks.com/v3/core-api/endpoints/cities/get-cities-by-search
      */
     public function search($searchQuery) {
-        $url = "cities/search/{$searchQuery}";
+        $url = "cities/search/" . rawurlencode((string) $searchQuery);
         return $this->call($url);
     }
 }

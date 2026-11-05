@@ -50,7 +50,7 @@ class Players extends FootballClient {
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/players/get-players-by-search-by-name
      */
     public function search(string $searchQuery) {
-        $url = "players/search/{$searchQuery}";
+        $url = "players/search/" . rawurlencode($searchQuery);
         return $this->call($url);
     }
 

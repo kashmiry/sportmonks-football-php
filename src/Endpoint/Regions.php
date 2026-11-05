@@ -42,7 +42,7 @@ class Regions extends FootballClient {
      * @link https://docs.sportmonks.com/v3/core-api/endpoints/regions/get-regions-by-search
      */
     public function search($searchQuery) {
-        $url = "regions/search/{$searchQuery}";
+        $url = "regions/search/" . rawurlencode((string) $searchQuery);
         return $this->call($url);
     }
 }
