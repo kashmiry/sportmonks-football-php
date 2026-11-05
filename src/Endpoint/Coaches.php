@@ -1,66 +1,62 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Football\Endpoint;
 
 use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\FootballClient;
 use stdClass;
 
-/**
- * Class Coaches
- * @package Sportmonks\Football\Endpoint
- */
-class Coaches extends FootballClient {
+class Coaches extends FootballClient
+{
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/coaches/get-all-coaches
      */
-    public function all() {
-        $url = "coaches";
+    public function all(): stdClass
+    {
+        $url = 'coaches';
         return $this->call($url);
     }
 
     /**
-     * @param int $coachId
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/coaches/get-coach-by-id
      */
-    public function getById(int $coachId) {
+    public function getById(int $coachId): stdClass
+    {
         $url = "coaches/{$coachId}";
         return $this->call($url);
     }
 
     /**
-     * @param int $countryId
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/coaches/get-coaches-by-country-id
      */
-    public function getByCountryId(int $countryId) {
+    public function getByCountryId(int $countryId): stdClass
+    {
         $url = "coaches/countries/{$countryId}";
         return $this->call($url);
     }
 
     /**
-     * @param string $searchQuery
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/coaches/get-coaches-search-by-name
      */
-    public function search(string $searchQuery) {
-        $url = "coaches/search/" . rawurlencode($searchQuery);
+    public function search(string $searchQuery): stdClass
+    {
+        $url = 'coaches/search/' . rawurlencode($searchQuery);
         return $this->call($url);
     }
 
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/coaches/get-last-updated-coaches
      */
-    public function getLastUpdated() {
-        $url = "coaches/latest";
+    public function getLastUpdated(): stdClass
+    {
+        $url = 'coaches/latest';
         return $this->call($url);
     }
 }

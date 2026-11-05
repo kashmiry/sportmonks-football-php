@@ -1,12 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Football\Exception;
 
 use Exception;
 
-/**
- * Class InvalidDateFormatException
- * @package Sportmonks\Football\Exception
- */
-class InvalidDateFormatException extends Exception {
-}
+class InvalidDateFormatException extends Exception {}

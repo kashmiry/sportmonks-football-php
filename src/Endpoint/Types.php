@@ -1,47 +1,44 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Football\Endpoint;
 
 use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\FootballClient;
 use stdClass;
 
-/**
- * Class Types
- * @package Sportmonks\Football\Endpoint
- */
-class Types extends FootballClient {
-
-    public $baseUri = 'https://api.sportmonks.com/v3/core/';
+class Types extends FootballClient
+{
+    public string $baseUri = 'https://api.sportmonks.com/v3/core/';
 
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/core-api/endpoints/types/get-all-types
      */
-    public function all() {
-        $url = "types";
+    public function all(): stdClass
+    {
+        $url = 'types';
         return $this->call($url);
     }
 
     /**
-     * @param int $typeId
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/core-api/endpoints/types/get-type-by-id
      */
-    public function getById(int $typeId) {
+    public function getById(int $typeId): stdClass
+    {
         $url = "types/{$typeId}";
         return $this->call($url);
     }
 
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/core-api/endpoints/types/get-type-by-entity
      */
-    public function getByEntity() {
-        $url = "types/entities";
+    public function getByEntity(): stdClass
+    {
+        $url = 'types/entities';
         return $this->call($url);
     }
 }

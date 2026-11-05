@@ -1,44 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Football\Endpoint;
 
 use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\FootballClient;
 use stdClass;
 
-/**
- * Class Livescores
- * @package Sportmonks\Football\Endpoint
- */
-class Livescores extends FootballClient {
-
+class Livescores extends FootballClient
+{
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/livescores/get-all-livescores
      */
-    public function all() {
-        $url = "livescores";
+    public function all(): stdClass
+    {
+        $url = 'livescores';
         return $this->call($url);
     }
 
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/livescores/get-inplay-livescores
      */
-    public function inplay() {
-        $url = "livescores/inplay";
+    public function inplay(): stdClass
+    {
+        $url = 'livescores/inplay';
         return $this->call($url);
     }
 
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/livescores/get-latest-updated-livescores
      */
-    public function latest() {
-        $url = "livescores/latest";
+    public function latest(): stdClass
+    {
+        $url = 'livescores/latest';
         return $this->call($url);
     }
 }

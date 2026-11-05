@@ -1,181 +1,197 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Football;
 
 use InvalidArgumentException;
+use JsonException;
 use Sportmonks\Football\Exception\ApiRequestException;
 use stdClass;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-/**
- * Class FootballClient
- * @package Sportmonks\Football
- */
-class FootballClient {
+class FootballClient
+{
+    public string $baseUri = 'https://api.sportmonks.com/v3/football/';
 
-	public $baseUri = 'https://api.sportmonks.com/v3/football/';
+    private HttpClientInterface $client;
 
-	private $client;
-	private $apiToken;
-	private $query = array();
+    private readonly string $apiToken;
 
-	/**
-	 * FootballClient constructor.
-	 */
-	public function __construct() {
-		// Set API Key
-		$this->apiToken = $_ENV['SPORTMONKS_API_TOKEN'] ?? null;
+    /** @var array<string, int|string> */
+    private array $query = [];
 
-		// Validate API Key
-		if (empty($this->apiToken)) {
-			throw new InvalidArgumentException('Invalid API Key Provided');
-		}
+    public function __construct()
+    {
+        $apiToken = $_ENV['SPORTMONKS_API_TOKEN'] ?? null;
 
-		// Set Timezone
-		if (isset($_ENV['SPORTMONKS_TIMEZONE'])) {
-			$this->query['timezone'] = $_ENV['SPORTMONKS_TIMEZONE'];
-		}
+        if (!is_string($apiToken) || $apiToken === '') {
+            throw new InvalidArgumentException('Invalid API Key Provided');
+        }
 
-		// Create Client
-		$this->client = HttpClient::create(['base_uri' => $this->baseUri]);
-	}
+        $this->apiToken = $apiToken;
 
-	/**
-	 * @param string $url
-	 * @return stdClass
-	 * @throws ApiRequestException
-	 */
-	protected function call(string $url) {
-		$query = $this->query;
+        $timezone = $_ENV['SPORTMONKS_TIMEZONE'] ?? null;
 
-		// Sportmonks rejects per_page together with a cursor (HTTP 400);
-		if (isset($query['cursor'])) {
-			unset($query['per_page']);
-		}
+        if (is_string($timezone) && $timezone !== '') {
+            $this->query['timezone'] = $timezone;
+        }
 
-		try {
-			$response = $this->client->request('GET', $url, [
-				'query' => $query,
-				'headers' => ['Authorization' => $this->apiToken],
-			])->getContent();
-			return json_decode($response);
-		} catch (HttpExceptionInterface $e) {
-			throw new ApiRequestException($this->httpErrorMessage($e), $e->getCode(), $e);
-		} catch (TransportExceptionInterface $e) {
-			throw new ApiRequestException($e->getMessage(), $e->getCode(), $e);
-		}
-	}
+        $this->client = HttpClient::create(['base_uri' => $this->baseUri]);
+    }
 
-	/**
-	 * Appends Sportmonks' own error message (e.g. why access was denied) to the HTTP error.
-	 *
-	 * @param HttpExceptionInterface $e
-	 * @return string
-	 */
-	private function httpErrorMessage(HttpExceptionInterface $e) {
-		$message = $e->getMessage();
+    /**
+     * @throws ApiRequestException
+     */
+    protected function call(string $url): stdClass
+    {
+        $query = $this->query;
 
-		try {
-			$body = json_decode($e->getResponse()->getContent(false));
-		} catch (TransportExceptionInterface $ignored) {
-			return $message;
-		}
+        // Sportmonks rejects per_page together with a cursor (HTTP 400).
+        if (isset($query['cursor'])) {
+            unset($query['per_page']);
+        }
 
-		if (is_object($body) && isset($body->message) && is_string($body->message) && trim($body->message) !== '') {
-			$message .= ' ' . trim($body->message);
-		}
+        try {
+            $content = $this->client->request('GET', $url, [
+                'query' => $query,
+                // Header, not query parameter, so the token never appears in URLs or logs.
+                'headers' => ['Authorization' => $this->apiToken],
+            ])->getContent();
+        } catch (HttpExceptionInterface $e) {
+            throw new ApiRequestException($this->httpErrorMessage($e), $e->getCode(), $e);
+        } catch (TransportExceptionInterface $e) {
+            throw new ApiRequestException($e->getMessage(), $e->getCode(), $e);
+        }
 
-		return $message;
-	}
+        try {
+            $data = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            throw new ApiRequestException('Invalid JSON response: ' . $e->getMessage(), 0, $e);
+        }
 
-	/**
-	 * @param array $includes
-	 * @return $this
-	 */
-	public function setIncludes(array $includes) {
-		// Trim & Join Array of Includes
-		$this->query['include'] = implode(";", array_map("trim", array_filter($includes)));
-		return $this;
-	}
+        if (!$data instanceof stdClass) {
+            throw new ApiRequestException('Unexpected response: expected a JSON object.');
+        }
 
-	/**
-	 * @param array $filters
-	 * @return $this
-	 */
-	public function setFilters(array $filters) {
-		// prepare filter
-		$filter = [];
-		foreach ($filters as $filterName => $filterVars) {
-			if (is_array($filterVars)) {
-				$filter[] = $filterName . ':' . implode(",", array_map("trim", array_filter($filterVars)));
-			} else {
-				$filter[] = $filterVars;
-			}
-		}
+        return $data;
+    }
 
-		$this->query['filters'] = implode(";", $filter);
+    /**
+     * Appends Sportmonks' own error message (e.g. why access was denied) to the HTTP error.
+     */
+    private function httpErrorMessage(HttpExceptionInterface $e): string
+    {
+        $message = $e->getMessage();
 
-		return $this;
-	}
+        try {
+            $body = json_decode($e->getResponse()->getContent(false));
+        } catch (TransportExceptionInterface) {
+            return $message;
+        }
 
-	/**
-	 * @param int $page
-	 * @return $this
-	 */
-	public function setPage(int $page) {
-		unset($this->query['cursor']);
-		$this->query['page'] = $page;
-		return $this;
-	}
+        if ($body instanceof stdClass && is_string($body->message ?? null) && trim($body->message) !== '') {
+            $message .= ' ' . trim($body->message);
+        }
 
-	/**
-	 * @param string|null $cursor
-	 * @return $this
-	 */
-	public function setCursor(?string $cursor) {
-		unset($this->query['page']);
-		unset($this->query['cursor']);
+        return $message;
+    }
 
-		$cursor = $this->cursorValue($cursor);
+    /**
+     * @param list<string> $includes
+     */
+    public function setIncludes(array $includes): static
+    {
+        $this->query['include'] = implode(';', self::cleanList($includes));
 
-		if ($cursor !== null) {
-			$this->query['cursor'] = $cursor;
-		}
+        return $this;
+    }
 
-		return $this;
-	}
+    /**
+     * @param array<int|string, string|list<int|string>> $filters Entity filters as name => IDs, flags as values.
+     */
+    public function setFilters(array $filters): static
+    {
+        $parts = [];
 
-	/**
-	 * @param string|null $cursor
-	 * @return string|null
-	 */
-	protected function cursorValue(?string $cursor) {
-		if ($cursor === null) return null;
+        foreach ($filters as $name => $value) {
+            $parts[] = is_array($value)
+                ? $name . ':' . implode(',', self::cleanList($value))
+                : $value;
+        }
 
-		$cursor = trim($cursor);
-		if ($cursor === '') return null;
+        $this->query['filters'] = implode(';', $parts);
 
-		if (preg_match('#^https?://#i', $cursor)) {
-			$query = parse_url($cursor, PHP_URL_QUERY);
-			if (is_string($query) && $query !== '') {
-				parse_str($query, $params);
-				if (isset($params['cursor']) && is_string($params['cursor']) && trim($params['cursor']) !== '') {
-					return trim($params['cursor']);
-				}
-			}
-		}
+        return $this;
+    }
 
-		return $cursor;
-	}
+    public function setPage(int $page): static
+    {
+        unset($this->query['cursor']);
+        $this->query['page'] = $page;
 
-	/**
-	 * @param int $perPage
-	 * @return $this
-	 */
-	public function setPerPage(int $perPage) {
-		$this->query['per_page'] = $perPage;
-		return $this;
-	}
+        return $this;
+    }
+
+    /**
+     * Accepts a cursor value or a full next-page URL. Null clears both cursor and page.
+     */
+    public function setCursor(?string $cursor): static
+    {
+        unset($this->query['page'], $this->query['cursor']);
+
+        $cursor = $this->cursorValue($cursor);
+
+        if ($cursor !== null) {
+            $this->query['cursor'] = $cursor;
+        }
+
+        return $this;
+    }
+
+    protected function cursorValue(?string $cursor): ?string
+    {
+        $cursor = trim((string) $cursor);
+
+        if ($cursor === '') {
+            return null;
+        }
+
+        if (preg_match('#^https?://#i', $cursor) === 1) {
+            $query = parse_url($cursor, PHP_URL_QUERY);
+
+            if (is_string($query) && $query !== '') {
+                parse_str($query, $params);
+
+                if (is_string($params['cursor'] ?? null) && trim($params['cursor']) !== '') {
+                    return trim($params['cursor']);
+                }
+            }
+        }
+
+        return $cursor;
+    }
+
+    public function setPerPage(int $perPage): static
+    {
+        $this->query['per_page'] = $perPage;
+
+        return $this;
+    }
+
+    /**
+     * Trims values and drops empty ones. Accepts integers, so IDs can be passed as ints.
+     *
+     * @param array<int|string> $values
+     * @return list<string>
+     */
+    protected static function cleanList(array $values): array
+    {
+        $values = array_map(static fn(int|string $value): string => trim((string) $value), $values);
+
+        return array_values(array_filter($values, static fn(string $value): bool => $value !== ''));
+    }
 }

@@ -1,37 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Football;
 
-use DateTime;
+use DateTimeImmutable;
 use Sportmonks\Football\Exception\InvalidDateFormatException;
 
-/**
- * Class FootballApiHelper
- * @package Sportmonks\Football
- */
-class FootballApiHelper {
+class FootballApiHelper
+{
     /**
-     * @param string $date
-     * @param string $format
-     * @return string
+     * Validates a date string strictly against the format and returns it normalized.
+     *
      * @throws InvalidDateFormatException
      */
-    public static function verifyDate(string $date, $format = 'Y-m-d') {
-        // Create DateTime from input string & format
-        $dateTime = DateTime::createFromFormat($format, $date);
+    public static function verifyDate(string $date, string $format = 'Y-m-d'): string
+    {
+        $dateTime = DateTimeImmutable::createFromFormat($format, $date);
+        $errors = DateTimeImmutable::getLastErrors();
 
-        // Check for errors
-        $dateTimeErrors = DateTime::getLastErrors() ?: [
-            'warning_count' => 0,
-            'error_count' => 0
-        ];
-
-        // Validate DateTime
-        if (!$dateTime || ($dateTimeErrors['warning_count'] + $dateTimeErrors['error_count']) > 0) {
-            throw new InvalidDateFormatException();
+        if ($dateTime === false || ($errors !== false && $errors['warning_count'] + $errors['error_count'] > 0)) {
+            throw new InvalidDateFormatException(sprintf('Invalid date "%s": expected format %s.', $date, $format));
         }
 
-        // Date is Valid - Return Formatted String
         return $dateTime->format($format);
     }
 }

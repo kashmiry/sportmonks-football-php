@@ -1,43 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Football\Endpoint;
 
 use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\FootballClient;
 use stdClass;
 
-/**
- * Class PreMatchNews
- * @package Sportmonks\Football\Endpoint
- */
-class PreMatchNews extends FootballClient {
+class PreMatchNews extends FootballClient
+{
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/news/get-pre-match-news
      */
-    public function all() {
-        $url = "news/pre-match";
+    public function all(): stdClass
+    {
+        $url = 'news/pre-match';
         return $this->call($url);
     }
 
     /**
-     * @param int $seasonId
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/news/get-pre-match-news-by-season-id
      */
-    public function getById(int $seasonId) {
+    public function getById(int $seasonId): stdClass
+    {
         $url = "news/pre-match/seasons/{$seasonId}";
         return $this->call($url);
     }
 
     /**
-     * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/news/get-pre-match-news-for-upcoming-fixtures
      */
-    public function upcomingFixtures() {
-        $url = "news/pre-match/upcoming";
+    public function upcomingFixtures(): stdClass
+    {
+        $url = 'news/pre-match/upcoming';
         return $this->call($url);
-    }}
+    }
+}

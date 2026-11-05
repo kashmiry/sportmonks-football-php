@@ -1,27 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Football;
 
 use Sportmonks\Football\Endpoint\Bookmakers;
+use Sportmonks\Football\Endpoint\Cities;
 use Sportmonks\Football\Endpoint\Coaches;
 use Sportmonks\Football\Endpoint\Commentaries;
+use Sportmonks\Football\Endpoint\Continents;
+use Sportmonks\Football\Endpoint\Countries;
+use Sportmonks\Football\Endpoint\Filters;
 use Sportmonks\Football\Endpoint\Fixtures;
+use Sportmonks\Football\Endpoint\InplayOdds;
 use Sportmonks\Football\Endpoint\Leagues;
 use Sportmonks\Football\Endpoint\Livescores;
 use Sportmonks\Football\Endpoint\Markets;
-use Sportmonks\Football\Endpoint\PreMatchNews;
-use Sportmonks\Football\Endpoint\InplayOdds;
-use Sportmonks\Football\Endpoint\PreMatchOdds;
+use Sportmonks\Football\Endpoint\My;
 use Sportmonks\Football\Endpoint\Players;
 use Sportmonks\Football\Endpoint\Predictions;
+use Sportmonks\Football\Endpoint\PreMatchNews;
+use Sportmonks\Football\Endpoint\PreMatchOdds;
 use Sportmonks\Football\Endpoint\Referees;
+use Sportmonks\Football\Endpoint\Regions;
 use Sportmonks\Football\Endpoint\Rivals;
 use Sportmonks\Football\Endpoint\Rounds;
 use Sportmonks\Football\Endpoint\Schedules;
 use Sportmonks\Football\Endpoint\Seasons;
 use Sportmonks\Football\Endpoint\Stages;
-use Sportmonks\Football\Endpoint\States;
 use Sportmonks\Football\Endpoint\Standings;
+use Sportmonks\Football\Endpoint\States;
 use Sportmonks\Football\Endpoint\Teams;
 use Sportmonks\Football\Endpoint\TeamSquads;
 use Sportmonks\Football\Endpoint\Topscorers;
@@ -29,248 +37,172 @@ use Sportmonks\Football\Endpoint\Transfers;
 use Sportmonks\Football\Endpoint\TvStations;
 use Sportmonks\Football\Endpoint\Types;
 use Sportmonks\Football\Endpoint\Venues;
-use Sportmonks\Football\Endpoint\Continents;
-use Sportmonks\Football\Endpoint\Countries;
-use Sportmonks\Football\Endpoint\Regions;
-use Sportmonks\Football\Endpoint\Cities;
-use Sportmonks\Football\Endpoint\Filters;
-use Sportmonks\Football\Endpoint\My;
 
-
-/**
- * Class FootballApi
- * @package Sportmonks\Football
- */
-class FootballApi {
-    /**
-     * @return Bookmakers
-     */
-    public static function bookmakers() {
+class FootballApi
+{
+    public static function bookmakers(): Bookmakers
+    {
         return new Bookmakers();
     }
 
-    /**
-     * @return Coaches
-     */
-    public static function coaches() {
+    public static function coaches(): Coaches
+    {
         return new Coaches();
     }
 
-    /**
-     * @return Commentaries
-     */
-    public static function commentaries() {
+    public static function commentaries(): Commentaries
+    {
         return new Commentaries();
     }
 
-    /**
-     * @return Fixtures
-     */
-    public static function fixtures() {
+    public static function fixtures(): Fixtures
+    {
         return new Fixtures();
     }
 
-    /**
-     * @return Leagues
-     */
-    public static function leagues() {
+    public static function leagues(): Leagues
+    {
         return new Leagues();
     }
 
-    /**
-     * @return Livescores
-     */
-    public static function livescores() {
+    public static function livescores(): Livescores
+    {
         return new Livescores();
     }
 
-    /**
-     * @return Markets
-     */
-    public static function markets() {
+    public static function markets(): Markets
+    {
         return new Markets();
     }
 
-    /**
-     * @return PreMatchNews
-     */
-    public static function preMatchNews() {
+    public static function preMatchNews(): PreMatchNews
+    {
         return new PreMatchNews();
     }
 
-    /**
-     * @return InplayOdds
-     */
-    public static function inplayOdds() {
+    public static function inplayOdds(): InplayOdds
+    {
         return new InplayOdds();
     }
 
-    /**
-     * @return PreMatchOdds
-     */
-    public static function preMatchOdds() {
+    public static function preMatchOdds(): PreMatchOdds
+    {
         return new PreMatchOdds();
     }
 
-    /**
-     * @return Players
-     */
-    public static function players() {
+    public static function players(): Players
+    {
         return new Players();
     }
 
-    /**
-     * @return Predictions
-     */
-    public static function predictions() {
+    public static function predictions(): Predictions
+    {
         return new Predictions();
     }
 
-    /**
-     * @return Referees
-     */
-    public static function referees() {
+    public static function referees(): Referees
+    {
         return new Referees();
     }
 
-    /**
-     * @return Rivals
-     */
-    public static function rivals() {
+    public static function rivals(): Rivals
+    {
         return new Rivals();
     }
 
-    /**
-     * @return Rounds
-     */
-    public static function rounds() {
+    public static function rounds(): Rounds
+    {
         return new Rounds();
     }
 
-    /**
-     * @return Schedules
-     */
-    public static function schedules() {
+    public static function schedules(): Schedules
+    {
         return new Schedules();
     }
 
-    /**
-     * @return Seasons
-     */
-    public static function seasons() {
+    public static function seasons(): Seasons
+    {
         return new Seasons();
     }
 
-    /**
-     * @return Stages
-     */
-    public static function stages() {
+    public static function stages(): Stages
+    {
         return new Stages();
     }
 
-    /**
-     * @return States
-     */
-    public static function states() {
+    public static function states(): States
+    {
         return new States();
     }
 
-    /**
-     * @return Standings
-     */
-    public static function standings() {
+    public static function standings(): Standings
+    {
         return new Standings();
     }
 
-    /**
-     * @return TeamSquads
-     */
-    public static function teamSquads() {
+    public static function teamSquads(): TeamSquads
+    {
         return new TeamSquads();
     }
 
-    /**
-     * @return Teams
-     */
-    public static function teams() {
+    public static function teams(): Teams
+    {
         return new Teams();
     }
 
-    /**
-     * @return Topscorers
-     */
-    public static function topScorers() {
+    public static function topScorers(): Topscorers
+    {
         return new Topscorers();
     }
 
-    /**
-     * @return Transfers
-     */
-    public static function transfers() {
+    public static function transfers(): Transfers
+    {
         return new Transfers();
     }
 
 
-    /**
-     * @return TvStations
-     */
-    public static function tvStations() {
+    public static function tvStations(): TvStations
+    {
         return new TvStations();
     }
 
-    /**
-     * @return Types
-     */
-    public static function types() {
+    public static function types(): Types
+    {
         return new Types();
     }
 
-    /**
-     * @return Venues
-     */
-    public static function venues() {
+    public static function venues(): Venues
+    {
         return new Venues();
     }
 
-    /**
-     * @return Continents
-     */
-    public static function continents() {
+    public static function continents(): Continents
+    {
         return new Continents();
     }
 
-    /**
-     * @return Countries
-     */
-    public static function countries() {
+    public static function countries(): Countries
+    {
         return new Countries();
     }
 
-    /**
-     * @return Regions
-     */
-    public static function regions() {
+    public static function regions(): Regions
+    {
         return new Regions();
     }
 
-    /**
-     * @return Cities
-     */
-    public static function cities() {
+    public static function cities(): Cities
+    {
         return new Cities();
     }
 
-    /**
-     * @return Filters
-     */
-    public static function filters() {
+    public static function filters(): Filters
+    {
         return new Filters();
     }
 
-    /**
-     * @return My
-     */
-    public static function my() {
+    public static function my(): My
+    {
         return new My();
     }
 }

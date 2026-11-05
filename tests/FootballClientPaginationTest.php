@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Test;
 
 use PHPUnit\Framework\TestCase;
@@ -8,15 +10,18 @@ use Sportmonks\Football\FootballClient;
 
 class FootballClientPaginationTest extends TestCase
 {
+    /**
+     * @return array<mixed>
+     */
     private function queryFor(FootballClient $client): array
     {
-        $reflection = new ReflectionClass($client);
-        $property = $reflection->getProperty('query');
+        $query = (new ReflectionClass($client))->getProperty('query')->getValue($client);
+        $this->assertIsArray($query);
 
-        return $property->getValue($client);
+        return $query;
     }
 
-    public function testSetPageRemovesCursor()
+    public function testSetPageRemovesCursor(): void
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
         $client = new FootballClient();
@@ -28,7 +33,7 @@ class FootballClientPaginationTest extends TestCase
         $this->assertArrayNotHasKey('cursor', $query);
     }
 
-    public function testSetCursorRemovesPage()
+    public function testSetCursorRemovesPage(): void
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
         $client = new FootballClient();
@@ -40,7 +45,7 @@ class FootballClientPaginationTest extends TestCase
         $this->assertArrayNotHasKey('page', $query);
     }
 
-    public function testSetCursorExtractsTokenFromSportmonksCursorUrl()
+    public function testSetCursorExtractsTokenFromSportmonksCursorUrl(): void
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
         $client = new FootballClient();
@@ -51,7 +56,7 @@ class FootballClientPaginationTest extends TestCase
         $this->assertSame('abc', $query['cursor']);
     }
 
-    public function testSetCursorNullRemovesCursorAndPage()
+    public function testSetCursorNullRemovesCursorAndPage(): void
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
         $client = new FootballClient();

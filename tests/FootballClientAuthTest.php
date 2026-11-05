@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sportmonks\Test;
 
 use PHPUnit\Framework\TestCase;
@@ -12,7 +14,7 @@ use Symfony\Component\HttpClient\Response\MockResponse;
 
 class FootballClientAuthTest extends TestCase
 {
-    private const TOKEN = 'secret-token-123';
+    private const string TOKEN = 'secret-token-123';
 
     private function useMockResponse(FootballClient $client, MockResponse $response): MockResponse
     {
@@ -23,7 +25,7 @@ class FootballClientAuthTest extends TestCase
         return $response;
     }
 
-    public function testTokenIsSentAsHeaderNotInUrl()
+    public function testTokenIsSentAsHeaderNotInUrl(): void
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = self::TOKEN;
         $client = FootballApi::bookmakers();
@@ -32,10 +34,12 @@ class FootballClientAuthTest extends TestCase
         $client->all();
 
         $this->assertStringNotContainsString(self::TOKEN, $response->getRequestUrl());
-        $this->assertContains('Authorization: ' . self::TOKEN, $response->getRequestOptions()['headers']);
+        $headers = $response->getRequestOptions()['headers'] ?? null;
+        $this->assertIsArray($headers);
+        $this->assertContains('Authorization: ' . self::TOKEN, $headers);
     }
 
-    public function testTokenIsNotLeakedInExceptionMessage()
+    public function testTokenIsNotLeakedInExceptionMessage(): void
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = self::TOKEN;
         $client = FootballApi::bookmakers();
