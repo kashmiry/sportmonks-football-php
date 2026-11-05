@@ -8,7 +8,7 @@ use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\FootballClient;
 use stdClass;
 
-class States extends FootballClient
+final class States extends FootballClient
 {
     /**
      * @throws ApiRequestException

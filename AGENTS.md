@@ -19,7 +19,7 @@ Verify paths and parameters against the Sportmonks docs, never from memory.
 - Each method's `@link` points to its docs page; append `.md` for Markdown. Find other pages in
   https://docs.sportmonks.com/v3/llms.txt, or ask directly: `https://docs.sportmonks.com/v3/sportmonks-ai-docs.md?ask=<question>`.
 - Take the path from the page's base URL line, not its code samples, which can be wrong.
-- New methods need an `@link`; new endpoint classes need a facade method in `FootballApi`.
+- New methods need an `@link`; new endpoint classes are `final` and need a facade method in `FootballApi`.
 - Update `docs/Reference.md`, and `skills/sportmonks-football-php/SKILL.md` if usage changes.
 
 ## Rules

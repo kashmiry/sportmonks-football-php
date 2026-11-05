@@ -94,4 +94,5 @@ Most methods take numeric IDs. Resolve names with `search()` first (for example
 - Each endpoint method's docblock has an `@link` to its Sportmonks docs page. Append `.md` to that URL
   for a Markdown version with the available includes, filters, and response fields.
 - Sportmonks docs index for agents: https://docs.sportmonks.com/v3/llms.txt
-- If an endpoint the user needs is not in this client, say so. Don't invent methods.
+- If an endpoint the user needs is not in this client, say so. Don't invent methods. Endpoint classes are `final`;
+  to add a missing endpoint, extend `Sportmonks\Football\FootballClient` and call `$this->call('path')`.

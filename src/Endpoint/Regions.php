@@ -8,7 +8,7 @@ use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\FootballClient;
 use stdClass;
 
-class Regions extends FootballClient
+final class Regions extends FootballClient
 {
     protected const string BASE_URI = 'https://api.sportmonks.com/v3/core/';
 

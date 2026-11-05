@@ -8,7 +8,7 @@ use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\FootballClient;
 use stdClass;
 
-class Livescores extends FootballClient
+final class Livescores extends FootballClient
 {
     /**
      * @throws ApiRequestException

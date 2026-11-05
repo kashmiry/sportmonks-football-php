@@ -10,7 +10,7 @@ use Sportmonks\Football\FootballApiHelper;
 use Sportmonks\Football\FootballClient;
 use stdClass;
 
-class Fixtures extends FootballClient
+final class Fixtures extends FootballClient
 {
     /**
      * @throws ApiRequestException
