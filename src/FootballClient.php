@@ -17,30 +17,45 @@ class FootballClient
 {
     public string $baseUri = 'https://api.sportmonks.com/v3/football/';
 
-    private HttpClientInterface $client;
+    private readonly HttpClientInterface $client;
 
     private readonly string $apiToken;
 
     /** @var array<string, int|string> */
     private array $query = [];
 
-    public function __construct()
-    {
-        $apiToken = $_ENV['SPORTMONKS_API_TOKEN'] ?? null;
+    /**
+     * Settings not passed in fall back to SPORTMONKS_API_TOKEN and SPORTMONKS_TIMEZONE in $_ENV.
+     *
+     * @param HttpClientInterface|null $httpClient Optional client for timeouts, retries, proxies, or tests.
+     */
+    public function __construct(
+        ?string $token = null,
+        ?string $timezone = null,
+        ?HttpClientInterface $httpClient = null,
+    ) {
+        $token ??= $this->env('SPORTMONKS_API_TOKEN');
 
-        if (!is_string($apiToken) || $apiToken === '') {
+        if ($token === null || $token === '') {
             throw new InvalidArgumentException('Invalid API Key Provided');
         }
 
-        $this->apiToken = $apiToken;
+        $this->apiToken = $token;
 
-        $timezone = $_ENV['SPORTMONKS_TIMEZONE'] ?? null;
+        $timezone ??= $this->env('SPORTMONKS_TIMEZONE');
 
-        if (is_string($timezone) && $timezone !== '') {
+        if ($timezone !== null && $timezone !== '') {
             $this->query['timezone'] = $timezone;
         }
 
-        $this->client = HttpClient::create(['base_uri' => $this->baseUri]);
+        $this->client = ($httpClient ?? HttpClient::create())->withOptions(['base_uri' => $this->baseUri]);
+    }
+
+    private function env(string $name): ?string
+    {
+        $value = $_ENV[$name] ?? null;
+
+        return is_string($value) ? $value : null;
     }
 
     /**

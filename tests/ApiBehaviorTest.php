@@ -6,7 +6,6 @@ namespace Sportmonks\Test;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 use Sportmonks\Football\Endpoint;
 use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\Exception\InvalidDateFormatException;
@@ -23,13 +22,14 @@ class ApiBehaviorTest extends TestCase
         unset($_ENV['SPORTMONKS_TIMEZONE']);
     }
 
-    private function useMockResponse(FootballClient $client, MockResponse $response): MockResponse
+    /**
+     * @template T of FootballClient
+     * @param class-string<T> $class
+     * @return T
+     */
+    private function clientWith(string $class, MockResponse $response): FootballClient
     {
-        $reflection = new ReflectionClass(FootballClient::class);
-        $property = $reflection->getProperty('client');
-        $property->setValue($client, new MockHttpClient($response, $client->baseUri));
-
-        return $response;
+        return new $class(httpClient: new MockHttpClient($response));
     }
 
     private function withoutQuery(string $url): string
@@ -39,8 +39,8 @@ class ApiBehaviorTest extends TestCase
 
     public function testUpcomingNewsUsesDocumentedPath(): void
     {
-        $client = FootballApi::preMatchNews();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith(Endpoint\PreMatchNews::class, $response);
 
         $client->upcomingFixtures();
 
@@ -49,8 +49,8 @@ class ApiBehaviorTest extends TestCase
 
     public function testFiltersAcceptIntegerIds(): void
     {
-        $client = FootballApi::fixtures();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith(Endpoint\Fixtures::class, $response);
 
         $client->setFilters(['eventTypes' => [14, 18], 'populate'])->all();
 
@@ -60,8 +60,8 @@ class ApiBehaviorTest extends TestCase
 
     public function testMultipleIdsAcceptIntegers(): void
     {
-        $client = FootballApi::fixtures();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith(Endpoint\Fixtures::class, $response);
 
         $client->getByMultipleIds([1, 2, 3]);
 
@@ -108,18 +108,44 @@ class ApiBehaviorTest extends TestCase
     #[DataProvider('nonObjectResponses')]
     public function testResponseThatIsNotJsonObjectThrows(string $body): void
     {
-        $client = FootballApi::fixtures();
-        $this->useMockResponse($client, new MockResponse($body));
+        $client = $this->clientWith(Endpoint\Fixtures::class, new MockResponse($body));
 
         $this->expectException(ApiRequestException::class);
         $client->all();
     }
 
+    public function testExplicitSettingsOverrideEnvironment(): void
+    {
+        $_ENV['SPORTMONKS_API_TOKEN'] = 'ENV_TOKEN';
+        $_ENV['SPORTMONKS_TIMEZONE'] = 'UTC';
+        $response = new MockResponse('{"data":[]}');
+        $client = new Endpoint\Fixtures('EXPLICIT_TOKEN', 'Asia/Riyadh', new MockHttpClient($response));
+
+        $client->all();
+
+        parse_str((string) parse_url($response->getRequestUrl(), PHP_URL_QUERY), $query);
+        $headers = $response->getRequestOptions()['headers'] ?? null;
+        $this->assertIsArray($headers);
+        $this->assertContains('Authorization: EXPLICIT_TOKEN', $headers);
+        $this->assertSame('Asia/Riyadh', $query['timezone'] ?? null);
+    }
+
+    public function testExplicitTokenWorksWithoutEnvironment(): void
+    {
+        unset($_ENV['SPORTMONKS_API_TOKEN']);
+        $response = new MockResponse('{"data":[]}');
+        $client = new Endpoint\Fixtures(token: 'EXPLICIT_TOKEN', httpClient: new MockHttpClient($response));
+
+        $client->all();
+
+        $this->assertSame('https://api.sportmonks.com/v3/football/fixtures', $this->withoutQuery($response->getRequestUrl()));
+    }
+
     public function testTimezoneIsSentWhenConfigured(): void
     {
         $_ENV['SPORTMONKS_TIMEZONE'] = 'Asia/Riyadh';
-        $client = FootballApi::fixtures();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith(Endpoint\Fixtures::class, $response);
 
         $client->all();
 
@@ -144,8 +170,8 @@ class ApiBehaviorTest extends TestCase
     public function testInvalidTimezoneIsIgnored(mixed $timezone): void
     {
         $_ENV['SPORTMONKS_TIMEZONE'] = $timezone;
-        $client = FootballApi::fixtures();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith(Endpoint\Fixtures::class, $response);
 
         $client->all();
 
@@ -185,8 +211,8 @@ class ApiBehaviorTest extends TestCase
     #[DataProvider('documentedPaths')]
     public function testEndpointUsesDocumentedPath(string $class, string $method, array $args, string $expectedUrl): void
     {
-        $client = new $class();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith($class, $response);
 
         $client->$method(...$args);
 
@@ -208,8 +234,8 @@ class ApiBehaviorTest extends TestCase
     #[DataProvider('searchTerms')]
     public function testSearchTermIsUrlEncoded(string $term, string $encoded): void
     {
-        $client = FootballApi::teams();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith(Endpoint\Teams::class, $response);
 
         $client->search($term);
 
@@ -221,8 +247,8 @@ class ApiBehaviorTest extends TestCase
 
     public function testPerPageIsNotSentWithCursor(): void
     {
-        $client = FootballApi::transfers();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith(Endpoint\Transfers::class, $response);
 
         $client->setPerPage(50)->setCursor('abc')->all();
 
@@ -233,8 +259,8 @@ class ApiBehaviorTest extends TestCase
 
     public function testPerPageIsSentWithoutCursor(): void
     {
-        $client = FootballApi::transfers();
-        $response = $this->useMockResponse($client, new MockResponse('{"data":[]}'));
+        $response = new MockResponse('{"data":[]}');
+        $client = $this->clientWith(Endpoint\Transfers::class, $response);
 
         $client->setPerPage(50)->all();
 
@@ -244,8 +270,7 @@ class ApiBehaviorTest extends TestCase
 
     public function testHttpErrorIncludesSportmonksMessage(): void
     {
-        $client = FootballApi::bookmakers();
-        $this->useMockResponse($client, new MockResponse(
+        $client = $this->clientWith(Endpoint\Bookmakers::class, new MockResponse(
             '{"message":"You do not have access to this endpoint."}',
             ['http_code' => 403],
         ));
@@ -262,8 +287,7 @@ class ApiBehaviorTest extends TestCase
 
     public function testHttpErrorWithoutJsonBodyKeepsOriginalMessage(): void
     {
-        $client = FootballApi::bookmakers();
-        $this->useMockResponse($client, new MockResponse('Bad Gateway', ['http_code' => 502]));
+        $client = $this->clientWith(Endpoint\Bookmakers::class, new MockResponse('Bad Gateway', ['http_code' => 502]));
 
         try {
             $client->all();

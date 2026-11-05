@@ -13,8 +13,10 @@ PHP client for the Sportmonks Football API v3. Every endpoint is reached through
 - The client reads `$_ENV['SPORTMONKS_API_TOKEN']` (required) and `$_ENV['SPORTMONKS_TIMEZONE']`
   (optional, defaults to UTC) when each endpoint object is created. Set them before calling `FootballApi`.
 - A missing token throws `InvalidArgumentException`. Never hardcode the token.
-- If the app doesn't populate `$_ENV` (for example, with cached framework config), assign the token from
-  the app's config before calling the client.
+- If the app doesn't populate `$_ENV` (for example, with cached framework config), or needs custom HTTP
+  behavior, construct the endpoint directly. Every argument is optional and falls back to `$_ENV`:
+  `new Sportmonks\Football\Endpoint\Fixtures(token: $token, timezone: 'UTC', httpClient: $httpClient)`.
+- Pass a Symfony `RetryableHttpClient` to retry 429 responses, or a `MockHttpClient` in tests.
 
 ## Making requests
 

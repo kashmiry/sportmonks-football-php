@@ -26,6 +26,14 @@ $_ENV['SPORTMONKS_TIMEZONE'] = 'Asia/Riyadh';
 
 Using a `.env` file? [`symfony/dotenv`](https://symfony.com/doc/current/components/dotenv.html) loads it into `$_ENV` for you.
 
+You can also pass settings directly to an endpoint, including your own [Symfony HTTP client](https://symfony.com/doc/current/http_client.html) for timeouts, retries, or tests:
+
+```php
+use Sportmonks\Football\Endpoint\Fixtures;
+
+$fixtures = new Fixtures(token: $token, timezone: 'Asia/Riyadh', httpClient: $httpClient);
+```
+
 ## 🚀 Usage
 
 ```php

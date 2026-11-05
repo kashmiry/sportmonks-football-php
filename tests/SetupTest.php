@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
+use Sportmonks\Football\Endpoint\Bookmakers;
 use Sportmonks\Football\Exception\ApiRequestException;
 use Sportmonks\Football\FootballApi;
 
@@ -42,6 +43,14 @@ class SetupTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
         FootballApi::bookmakers();
+    }
+
+    public function testEmptyExplicitTokenIsRejected(): void
+    {
+        $_ENV['SPORTMONKS_API_TOKEN'] = 'ENV_TOKEN';
+
+        $this->expectException(InvalidArgumentException::class);
+        new Bookmakers(token: '');
     }
 
     #[Group('network')]

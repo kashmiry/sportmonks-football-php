@@ -4,65 +4,58 @@ declare(strict_types=1);
 
 namespace Sportmonks\Test;
 
+use Closure;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
-use Sportmonks\Football\FootballClient;
+use Sportmonks\Football\Endpoint\Transfers;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
 
 class FootballClientPaginationTest extends TestCase
 {
     /**
+     * Sends a request after applying the given options and returns the query string that was sent.
+     *
+     * @param Closure(Transfers): Transfers $configure
      * @return array<mixed>
      */
-    private function queryFor(FootballClient $client): array
+    private function sentQuery(Closure $configure): array
     {
-        $query = (new ReflectionClass($client))->getProperty('query')->getValue($client);
-        $this->assertIsArray($query);
+        $response = new MockResponse('{"data":[]}');
+        $configure(new Transfers(token: 'TOKEN', httpClient: new MockHttpClient($response)))->all();
+
+        parse_str((string) parse_url($response->getRequestUrl(), PHP_URL_QUERY), $query);
 
         return $query;
     }
 
     public function testSetPageRemovesCursor(): void
     {
-        $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
-        $client = new FootballClient();
+        $query = $this->sentQuery(fn(Transfers $client): Transfers => $client->setCursor('abc')->setPage(2));
 
-        $client->setCursor('abc')->setPage(2);
-        $query = $this->queryFor($client);
-
-        $this->assertSame(2, $query['page']);
+        $this->assertSame('2', $query['page'] ?? null);
         $this->assertArrayNotHasKey('cursor', $query);
     }
 
     public function testSetCursorRemovesPage(): void
     {
-        $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
-        $client = new FootballClient();
+        $query = $this->sentQuery(fn(Transfers $client): Transfers => $client->setPage(2)->setCursor('abc'));
 
-        $client->setPage(2)->setCursor('abc');
-        $query = $this->queryFor($client);
-
-        $this->assertSame('abc', $query['cursor']);
+        $this->assertSame('abc', $query['cursor'] ?? null);
         $this->assertArrayNotHasKey('page', $query);
     }
 
     public function testSetCursorExtractsTokenFromSportmonksCursorUrl(): void
     {
-        $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
-        $client = new FootballClient();
+        $query = $this->sentQuery(fn(Transfers $client): Transfers => $client->setCursor(
+            'https://api.sportmonks.com/v3/football/transfers?filter=populate&cursor=abc',
+        ));
 
-        $client->setCursor('https://api.sportmonks.com/v3/football/transfers?filter=populate&cursor=abc');
-        $query = $this->queryFor($client);
-
-        $this->assertSame('abc', $query['cursor']);
+        $this->assertSame('abc', $query['cursor'] ?? null);
     }
 
     public function testSetCursorNullRemovesCursorAndPage(): void
     {
-        $_ENV['SPORTMONKS_API_TOKEN'] = 'TOKEN';
-        $client = new FootballClient();
-
-        $client->setPage(2)->setCursor(null);
-        $query = $this->queryFor($client);
+        $query = $this->sentQuery(fn(Transfers $client): Transfers => $client->setPage(2)->setCursor(null));
 
         $this->assertArrayNotHasKey('cursor', $query);
         $this->assertArrayNotHasKey('page', $query);

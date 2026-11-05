@@ -26,7 +26,7 @@ Verify paths and parameters against the Sportmonks docs, never from memory.
 
 - **Don't break the public API.** To rename a method, add the new one and keep the old as a
   `@deprecated` alias.
-- **Tests stay offline.** Mock HTTP with `MockHttpClient` (see `tests/FootballClientAuthTest.php`).
+- **Tests stay offline.** Pass a `MockHttpClient` to the endpoint constructor (see `tests/ApiBehaviorTest.php`).
   Tests that need the network get `#[Group('network')]`. Never use real API tokens.
 - **Keep the token out of URLs.** It's sent in the `Authorization` header.
 - **Keep docs short.** README and Reference use emoji headings and minimal prose.
