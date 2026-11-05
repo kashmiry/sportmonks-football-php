@@ -304,7 +304,7 @@ $response = FootballApi::bookmakers()->getByFixtureId($fixtureId);
 
 ```php
 $response = FootballApi::preMatchNews()->all();
-$response = FootballApi::preMatchNews()->getById($seasonId); // news for a season
+$response = FootballApi::preMatchNews()->getBySeasonId($seasonId);
 $response = FootballApi::preMatchNews()->upcomingFixtures();
 ```
 
@@ -312,7 +312,7 @@ $response = FootballApi::preMatchNews()->upcomingFixtures();
 
 ```php
 $response = FootballApi::rivals()->all();
-$response = FootballApi::rivals()->getById($teamId); // rivals of a team
+$response = FootballApi::rivals()->getByTeamId($teamId);
 ```
 
 ### 🎙️ Commentaries

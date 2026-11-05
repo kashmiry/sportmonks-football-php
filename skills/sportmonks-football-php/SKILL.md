@@ -81,8 +81,6 @@ Most methods take numeric IDs. Resolve names with `search()` first (for example
 
 | Call | What it actually returns |
 | --- | --- |
-| `preMatchNews()->getById($seasonId)` | Pre-match news for a season |
-| `rivals()->getById($teamId)` | Rivals of a team |
 | `fixtures()->getLastUpdated()` | Recently updated fixtures |
 | `types()->getByEntity()` | Types grouped by entity |
 | `predictions()->all()` | Probabilities |

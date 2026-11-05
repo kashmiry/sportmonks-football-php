@@ -24,7 +24,7 @@ class PreMatchNews extends FootballClient
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/news/get-pre-match-news-by-season-id
      */
-    public function getById(int $seasonId): stdClass
+    public function getBySeasonId(int $seasonId): stdClass
     {
         $url = "news/pre-match/seasons/{$seasonId}";
         return $this->call($url);

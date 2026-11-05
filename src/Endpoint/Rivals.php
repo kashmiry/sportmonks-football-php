@@ -24,7 +24,7 @@ class Rivals extends FootballClient
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/rivals/get-rivals-by-team-id
      */
-    public function getById(int $teamId): stdClass
+    public function getByTeamId(int $teamId): stdClass
     {
         $url = "rivals/teams/{$teamId}";
         return $this->call($url);

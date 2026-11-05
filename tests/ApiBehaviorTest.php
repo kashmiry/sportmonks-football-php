@@ -164,7 +164,8 @@ class ApiBehaviorTest extends TestCase
         return [
             [Endpoint\Schedules::class, 'getBySeasonAndTeamId', [1, 2], $football . 'schedules/seasons/1/teams/2'],
             [Endpoint\Commentaries::class, 'getByFixtureId', [1], $football . 'commentaries/fixtures/1'],
-            [Endpoint\Rivals::class, 'getById', [1], $football . 'rivals/teams/1'],
+            [Endpoint\Rivals::class, 'getByTeamId', [1], $football . 'rivals/teams/1'],
+            [Endpoint\PreMatchNews::class, 'getBySeasonId', [1], $football . 'news/pre-match/seasons/1'],
             [Endpoint\Leagues::class, 'getByFixtureDate', ['2026-11-05'], $football . 'leagues/date/2026-11-05'],
             [Endpoint\Predictions::class, 'getPredictabilityByLeagueId', [1], $football . 'predictions/predictability/leagues/1'],
             [Endpoint\Bookmakers::class, 'all', [], $odds . 'bookmakers'],
