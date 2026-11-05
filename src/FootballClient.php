@@ -20,6 +20,7 @@ class FootballClient {
 	public $baseUri = 'https://api.sportmonks.com/v3/football/';
 
 	private $client;
+	private $apiToken;
 	private $query = array();
 
 	/**
@@ -27,10 +28,10 @@ class FootballClient {
 	 */
 	public function __construct() {
 		// Set API Key
-		$this->query['api_token'] = $_ENV['SPORTMONKS_API_TOKEN'];
+		$this->apiToken = $_ENV['SPORTMONKS_API_TOKEN'] ?? null;
 
 		// Validate API Key
-		if (empty($this->query['api_token'])) {
+		if (empty($this->apiToken)) {
 			throw new InvalidArgumentException('Invalid API Key Provided');
 		}
 
@@ -50,7 +51,10 @@ class FootballClient {
 	 */
 	protected function call(string $url) {
 		try {
-			$response = $this->client->request('GET', $url, ['query' => $this->query])->getContent();
+			$response = $this->client->request('GET', $url, [
+				'query' => $this->query,
+				'headers' => ['Authorization' => $this->apiToken],
+			])->getContent();
 			return json_decode($response);
 		} catch (TransportExceptionInterface $e) {
 			throw new ApiRequestException($e->getMessage(), $e->getCode());
