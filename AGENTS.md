@@ -4,7 +4,7 @@
 
 PHP client for the Sportmonks Football API v3, published as `kashmiry/sportmonks-football-php`.
 Code must run on the minimum PHP version in `composer.json` (`require.php`); use modern syntax up to that version.
-Before finishing, run `composer test` and `composer analyse`. Both must pass.
+Before finishing, run `composer fix`, then `composer test`, `composer analyse`, and `composer lint`. All must pass.
 
 | Path | Purpose |
 | --- | --- |

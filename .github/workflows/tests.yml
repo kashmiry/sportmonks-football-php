@@ -39,3 +39,6 @@ jobs:
 
       - name: Run static analysis
         run: composer analyse
+
+      - name: Check code style
+        run: composer lint

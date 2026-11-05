@@ -7,3 +7,4 @@
 !.env.example
 *.code-workspace
 .DS_Store
+/.php-cs-fixer.cache
