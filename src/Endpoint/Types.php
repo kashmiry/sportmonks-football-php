@@ -10,7 +10,7 @@ use stdClass;
 
 class Types extends FootballClient
 {
-    public string $baseUri = 'https://api.sportmonks.com/v3/core/';
+    protected const string BASE_URI = 'https://api.sportmonks.com/v3/core/';
 
     /**
      * @throws ApiRequestException

@@ -15,7 +15,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class FootballClient
 {
-    public string $baseUri = 'https://api.sportmonks.com/v3/football/';
+    protected const string BASE_URI = 'https://api.sportmonks.com/v3/football/';
 
     private readonly HttpClientInterface $client;
 
@@ -48,7 +48,7 @@ class FootballClient
             $this->query['timezone'] = $timezone;
         }
 
-        $this->client = ($httpClient ?? HttpClient::create())->withOptions(['base_uri' => $this->baseUri]);
+        $this->client = ($httpClient ?? HttpClient::create())->withOptions(['base_uri' => static::BASE_URI]);
     }
 
     private function env(string $name): ?string

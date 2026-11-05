@@ -10,7 +10,7 @@ use stdClass;
 
 class Bookmakers extends FootballClient
 {
-    public string $baseUri = 'https://api.sportmonks.com/v3/odds/';
+    protected const string BASE_URI = 'https://api.sportmonks.com/v3/odds/';
 
     /**
      * @throws ApiRequestException

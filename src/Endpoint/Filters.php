@@ -10,7 +10,7 @@ use stdClass;
 
 class Filters extends FootballClient
 {
-    public string $baseUri = 'https://api.sportmonks.com/v3/my/';
+    protected const string BASE_URI = 'https://api.sportmonks.com/v3/my/';
 
     /**
      * @throws ApiRequestException
