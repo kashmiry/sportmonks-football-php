@@ -6,9 +6,7 @@ use InvalidArgumentException;
 use Sportmonks\Football\Exception\ApiRequestException;
 use stdClass;
 use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 /**
@@ -56,15 +54,33 @@ class FootballClient {
 				'headers' => ['Authorization' => $this->apiToken],
 			])->getContent();
 			return json_decode($response);
+		} catch (HttpExceptionInterface $e) {
+			throw new ApiRequestException($this->httpErrorMessage($e), $e->getCode(), $e);
 		} catch (TransportExceptionInterface $e) {
-			throw new ApiRequestException($e->getMessage(), $e->getCode());
-		} catch (RedirectionExceptionInterface $e) {
-			throw new ApiRequestException($e->getMessage(), $e->getCode());
-		} catch (ClientExceptionInterface $e) {
-			throw new ApiRequestException($e->getMessage(), $e->getCode());
-		} catch (ServerExceptionInterface $e) {
-			throw new ApiRequestException($e->getMessage(), $e->getCode());
+			throw new ApiRequestException($e->getMessage(), $e->getCode(), $e);
 		}
+	}
+
+	/**
+	 * Appends Sportmonks' own error message (e.g. why access was denied) to the HTTP error.
+	 *
+	 * @param HttpExceptionInterface $e
+	 * @return string
+	 */
+	private function httpErrorMessage(HttpExceptionInterface $e) {
+		$message = $e->getMessage();
+
+		try {
+			$body = json_decode($e->getResponse()->getContent(false));
+		} catch (TransportExceptionInterface $ignored) {
+			return $message;
+		}
+
+		if (is_object($body) && isset($body->message) && is_string($body->message) && trim($body->message) !== '') {
+			$message .= ' ' . trim($body->message);
+		}
+
+		return $message;
 	}
 
 	/**

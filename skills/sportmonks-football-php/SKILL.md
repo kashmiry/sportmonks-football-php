@@ -64,7 +64,7 @@ while (true) {
 
 | Exception | When |
 | --- | --- |
-| `Sportmonks\Football\Exception\ApiRequestException` | HTTP error or network failure. For HTTP errors, `getCode()` is the status: 401/403 token or plan, 404 not found, 429 rate limited (back off and retry). Network failures (DNS, timeout, connection) have no status and usually code `0`. |
+| `Sportmonks\Football\Exception\ApiRequestException` | HTTP error or network failure. For HTTP errors, `getCode()` is the status (401/403 token or plan, 404 not found, 429 rate limited: back off and retry), and the message includes Sportmonks' explanation when one is returned. Network failures (DNS, timeout, connection) have no status and usually code `0`. |
 | `Sportmonks\Football\Exception\InvalidDateFormatException` | A date argument is not `Y-m-d`. |
 | `InvalidArgumentException` | No API token is set. |
 
