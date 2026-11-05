@@ -101,7 +101,7 @@ class FootballClient {
 	}
 
 	/**
-	 * @param array $includes
+	 * @param array $filters
 	 * @return $this
 	 */
 	public function setFilters(array $filters) {

@@ -22,7 +22,7 @@ class States extends FootballClient {
     }
 
     /**
-     * @param int $stageId
+     * @param int $stateId
      * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/states/get-state-by-id

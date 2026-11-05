@@ -47,7 +47,7 @@ class Bookmakers extends FootballClient {
     }
 
     /**
-     * @param int $bookmakerId
+     * @param int $fixtureId
      * @return stdClass
      * @throws ApiRequestException
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/bookmakers/get-bookmaker-by-fixture-id
