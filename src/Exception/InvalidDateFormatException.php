@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Kash\Sportmonks\Football\Exception;
 
-use Exception;
+use InvalidArgumentException;
 
-class InvalidDateFormatException extends Exception {}
+class InvalidDateFormatException extends InvalidArgumentException implements SportmonksException {}

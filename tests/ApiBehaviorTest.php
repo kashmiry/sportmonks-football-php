@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Kash\Sportmonks\Football\Tests;
 
+use InvalidArgumentException;
 use Kash\Sportmonks\Football\Endpoint;
 use Kash\Sportmonks\Football\Exception\ApiRequestException;
 use Kash\Sportmonks\Football\Exception\InvalidDateFormatException;
+use Kash\Sportmonks\Football\Exception\SportmonksException;
 use Kash\Sportmonks\Football\FootballApi;
 use Kash\Sportmonks\Football\FootballClient;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
@@ -282,6 +285,30 @@ class ApiBehaviorTest extends TestCase
             $this->assertSame(403, $e->getCode());
             $this->assertStringContainsString('You do not have access to this endpoint.', $e->getMessage());
             $this->assertNotNull($e->getPrevious());
+        }
+    }
+
+    public function testRequestErrorIsCatchableAsSportmonksException(): void
+    {
+        $client = $this->clientWith(Endpoint\Bookmakers::class, new MockResponse('', ['http_code' => 500]));
+
+        try {
+            $client->all();
+            $this->fail('Expected SportmonksException');
+        } catch (SportmonksException $e) {
+            $this->assertInstanceOf(RuntimeException::class, $e);
+        }
+    }
+
+    public function testDateErrorIsCatchableAsSportmonksException(): void
+    {
+        $client = $this->clientWith(Endpoint\Fixtures::class, new MockResponse('{"data":[]}'));
+
+        try {
+            $client->getByDate('05-11-2026');
+            $this->fail('Expected SportmonksException');
+        } catch (SportmonksException $e) {
+            $this->assertInstanceOf(InvalidArgumentException::class, $e);
         }
     }
 

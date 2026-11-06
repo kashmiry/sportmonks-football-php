@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Kash\Sportmonks\Football\Exception;
 
-use Exception;
+use RuntimeException;
 
-class ApiRequestException extends Exception {}
+class ApiRequestException extends RuntimeException implements SportmonksException {}

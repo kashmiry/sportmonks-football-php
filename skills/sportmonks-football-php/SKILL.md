@@ -74,6 +74,8 @@ while (true) {
 | `Kash\Sportmonks\Football\Exception\InvalidDateFormatException` | A date argument is not `Y-m-d`. |
 | `InvalidArgumentException` | No API token is set. |
 
+Both package exceptions implement `Kash\Sportmonks\Football\Exception\SportmonksException`, so one `catch` handles either.
+
 ## Finding IDs
 
 Most methods take numeric IDs. Resolve names with `search()` first (for example
