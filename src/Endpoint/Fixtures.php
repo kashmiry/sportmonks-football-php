@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kash\Sportmonks\Football\Endpoint;
 
+use InvalidArgumentException;
 use Kash\Sportmonks\Football\Exception\ApiRequestException;
 use Kash\Sportmonks\Football\Exception\InvalidDateFormatException;
 use Kash\Sportmonks\Football\FootballApiHelper;
@@ -33,11 +34,21 @@ final class Fixtures extends FootballClient
     /**
      * @param list<int|string> $fixtureIds
      * @throws ApiRequestException
+     * @throws InvalidArgumentException If an ID is not a whole number.
      * @link https://docs.sportmonks.com/v3/endpoints-and-entities/endpoints/fixtures/get-fixtures-by-multiple-ids
      */
     public function getByMultipleIds(array $fixtureIds): stdClass
     {
-        return $this->call('fixtures/multi/' . implode(',', self::cleanList($fixtureIds)));
+        $ids = self::cleanList($fixtureIds);
+
+        // IDs go into the URL path, so anything but digits could reach other endpoints.
+        foreach ($ids as $id) {
+            if (preg_match('/\A[0-9]+\z/', $id) !== 1) {
+                throw new InvalidArgumentException(sprintf('Invalid fixture ID "%s": expected a whole number.', $id));
+            }
+        }
+
+        return $this->call('fixtures/multi/' . implode(',', $ids));
     }
 
     /**

@@ -66,9 +66,43 @@ class ApiBehaviorTest extends TestCase
         $response = new MockResponse('{"data":[]}');
         $client = $this->clientWith(Endpoint\Fixtures::class, $response);
 
-        $client->getByMultipleIds([1, 2, 3]);
+        $client->getByMultipleIds([1, '2', ' 3 ']);
 
         $this->assertStringEndsWith('/football/fixtures/multi/1,2,3', $this->withoutQuery($response->getRequestUrl()));
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function unsafeIds(): array
+    {
+        return [
+            'path traversal' => ['../../../core/countries'],
+            'slash' => ['1/2'],
+            'encoded dot' => ['%2E%2E'],
+            'query' => ['1?include=x'],
+            'fragment' => ['1#x'],
+            'letters' => ['19135003a'],
+            'negative' => ['-1'],
+        ];
+    }
+
+    #[DataProvider('unsafeIds')]
+    public function testMultipleIdsRejectNonNumericIds(string $id): void
+    {
+        $requests = 0;
+        $client = new Endpoint\Fixtures(httpClient: new MockHttpClient(function () use (&$requests): MockResponse {
+            $requests++;
+
+            return new MockResponse('{"data":[]}');
+        }));
+
+        try {
+            $client->getByMultipleIds([1, $id]);
+            $this->fail('Expected InvalidArgumentException');
+        } catch (InvalidArgumentException) {
+            $this->assertSame(0, $requests, 'No request should be sent');
+        }
     }
 
     /**
