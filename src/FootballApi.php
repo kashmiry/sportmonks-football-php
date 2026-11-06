@@ -2,41 +2,41 @@
 
 declare(strict_types=1);
 
-namespace Sportmonks\Football;
+namespace Kash\Sportmonks\Football;
 
-use Sportmonks\Football\Endpoint\Bookmakers;
-use Sportmonks\Football\Endpoint\Cities;
-use Sportmonks\Football\Endpoint\Coaches;
-use Sportmonks\Football\Endpoint\Commentaries;
-use Sportmonks\Football\Endpoint\Continents;
-use Sportmonks\Football\Endpoint\Countries;
-use Sportmonks\Football\Endpoint\Filters;
-use Sportmonks\Football\Endpoint\Fixtures;
-use Sportmonks\Football\Endpoint\InplayOdds;
-use Sportmonks\Football\Endpoint\Leagues;
-use Sportmonks\Football\Endpoint\Livescores;
-use Sportmonks\Football\Endpoint\Markets;
-use Sportmonks\Football\Endpoint\My;
-use Sportmonks\Football\Endpoint\Players;
-use Sportmonks\Football\Endpoint\Predictions;
-use Sportmonks\Football\Endpoint\PreMatchNews;
-use Sportmonks\Football\Endpoint\PreMatchOdds;
-use Sportmonks\Football\Endpoint\Referees;
-use Sportmonks\Football\Endpoint\Regions;
-use Sportmonks\Football\Endpoint\Rivals;
-use Sportmonks\Football\Endpoint\Rounds;
-use Sportmonks\Football\Endpoint\Schedules;
-use Sportmonks\Football\Endpoint\Seasons;
-use Sportmonks\Football\Endpoint\Stages;
-use Sportmonks\Football\Endpoint\Standings;
-use Sportmonks\Football\Endpoint\States;
-use Sportmonks\Football\Endpoint\Teams;
-use Sportmonks\Football\Endpoint\TeamSquads;
-use Sportmonks\Football\Endpoint\Topscorers;
-use Sportmonks\Football\Endpoint\Transfers;
-use Sportmonks\Football\Endpoint\TvStations;
-use Sportmonks\Football\Endpoint\Types;
-use Sportmonks\Football\Endpoint\Venues;
+use Kash\Sportmonks\Football\Endpoint\Bookmakers;
+use Kash\Sportmonks\Football\Endpoint\Cities;
+use Kash\Sportmonks\Football\Endpoint\Coaches;
+use Kash\Sportmonks\Football\Endpoint\Commentaries;
+use Kash\Sportmonks\Football\Endpoint\Continents;
+use Kash\Sportmonks\Football\Endpoint\Countries;
+use Kash\Sportmonks\Football\Endpoint\Filters;
+use Kash\Sportmonks\Football\Endpoint\Fixtures;
+use Kash\Sportmonks\Football\Endpoint\InplayOdds;
+use Kash\Sportmonks\Football\Endpoint\Leagues;
+use Kash\Sportmonks\Football\Endpoint\Livescores;
+use Kash\Sportmonks\Football\Endpoint\Markets;
+use Kash\Sportmonks\Football\Endpoint\My;
+use Kash\Sportmonks\Football\Endpoint\Players;
+use Kash\Sportmonks\Football\Endpoint\Predictions;
+use Kash\Sportmonks\Football\Endpoint\PreMatchNews;
+use Kash\Sportmonks\Football\Endpoint\PreMatchOdds;
+use Kash\Sportmonks\Football\Endpoint\Referees;
+use Kash\Sportmonks\Football\Endpoint\Regions;
+use Kash\Sportmonks\Football\Endpoint\Rivals;
+use Kash\Sportmonks\Football\Endpoint\Rounds;
+use Kash\Sportmonks\Football\Endpoint\Schedules;
+use Kash\Sportmonks\Football\Endpoint\Seasons;
+use Kash\Sportmonks\Football\Endpoint\Stages;
+use Kash\Sportmonks\Football\Endpoint\Standings;
+use Kash\Sportmonks\Football\Endpoint\States;
+use Kash\Sportmonks\Football\Endpoint\Teams;
+use Kash\Sportmonks\Football\Endpoint\TeamSquads;
+use Kash\Sportmonks\Football\Endpoint\Topscorers;
+use Kash\Sportmonks\Football\Endpoint\Transfers;
+use Kash\Sportmonks\Football\Endpoint\TvStations;
+use Kash\Sportmonks\Football\Endpoint\Types;
+use Kash\Sportmonks\Football\Endpoint\Venues;
 
 class FootballApi
 {

@@ -29,7 +29,7 @@ Using a `.env` file? [`symfony/dotenv`](https://symfony.com/doc/current/componen
 You can also pass settings directly to an endpoint, including your own [Symfony HTTP client](https://symfony.com/doc/current/http_client.html) for timeouts, retries, or tests:
 
 ```php
-use Sportmonks\Football\Endpoint\Fixtures;
+use Kash\Sportmonks\Football\Endpoint\Fixtures;
 
 $fixtures = new Fixtures(token: $token, timezone: 'Asia/Riyadh', httpClient: $httpClient);
 ```
@@ -37,7 +37,7 @@ $fixtures = new Fixtures(token: $token, timezone: 'Asia/Riyadh', httpClient: $ht
 ## 🚀 Usage
 
 ```php
-use Sportmonks\Football\FootballApi;
+use Kash\Sportmonks\Football\FootballApi;
 
 $response = FootballApi::fixtures()
     ->setIncludes(['scores', 'lineups', 'events'])

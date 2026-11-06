@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sportmonks\Football\Exception;
+namespace Kash\Sportmonks\Football\Exception;
 
 use Exception;
 

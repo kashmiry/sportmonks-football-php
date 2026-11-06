@@ -25,12 +25,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Sportmonks\\Football\\": "src/"
+      "Kash\\Sportmonks\\Football\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Sportmonks\\Test\\": "tests/"
+      "Kash\\Sportmonks\\Football\\Tests\\": "tests/"
     }
   },
   "scripts": {
@@ -55,8 +55,5 @@
   "support": {
     "issues": "https://github.com/kashmiry/sportmonks-football-php/issues",
     "source": "https://github.com/kashmiry/sportmonks-football-php"
-  },
-  "conflict": {
-    "tetzilla/sportmonks-football-api": "*"
   }
 }

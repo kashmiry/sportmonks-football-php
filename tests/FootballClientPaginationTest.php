@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Sportmonks\Test;
+namespace Kash\Sportmonks\Football\Tests;
 
 use Closure;
+use Kash\Sportmonks\Football\Endpoint\Transfers;
 use PHPUnit\Framework\TestCase;
-use Sportmonks\Football\Endpoint\Transfers;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 

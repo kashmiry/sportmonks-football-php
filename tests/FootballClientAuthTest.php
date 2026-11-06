@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sportmonks\Test;
+namespace Kash\Sportmonks\Football\Tests;
 
+use Kash\Sportmonks\Football\Endpoint;
+use Kash\Sportmonks\Football\Exception\ApiRequestException;
+use Kash\Sportmonks\Football\FootballClient;
 use PHPUnit\Framework\TestCase;
-use Sportmonks\Football\Endpoint;
-use Sportmonks\Football\Exception\ApiRequestException;
-use Sportmonks\Football\FootballClient;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 

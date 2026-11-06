@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Sportmonks\Test;
+namespace Kash\Sportmonks\Football\Tests;
 
 use InvalidArgumentException;
+use Kash\Sportmonks\Football\Endpoint\Bookmakers;
+use Kash\Sportmonks\Football\Exception\ApiRequestException;
+use Kash\Sportmonks\Football\FootballApi;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
-use Sportmonks\Football\Endpoint\Bookmakers;
-use Sportmonks\Football\Exception\ApiRequestException;
-use Sportmonks\Football\FootballApi;
 
 class SetupTest extends TestCase
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Sportmonks\Football;
+namespace Kash\Sportmonks\Football;
 
 use InvalidArgumentException;
 use JsonException;
-use Sportmonks\Football\Exception\ApiRequestException;
+use Kash\Sportmonks\Football\Exception\ApiRequestException;
 use stdClass;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sportmonks\Football\Endpoint;
+namespace Kash\Sportmonks\Football\Endpoint;
 
-use Sportmonks\Football\Exception\ApiRequestException;
-use Sportmonks\Football\Exception\InvalidDateFormatException;
-use Sportmonks\Football\FootballApiHelper;
-use Sportmonks\Football\FootballClient;
+use Kash\Sportmonks\Football\Exception\ApiRequestException;
+use Kash\Sportmonks\Football\Exception\InvalidDateFormatException;
+use Kash\Sportmonks\Football\FootballApiHelper;
+use Kash\Sportmonks\Football\FootballClient;
 use stdClass;
 
 final class Transfers extends FootballClient

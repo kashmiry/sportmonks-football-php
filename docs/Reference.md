@@ -1,6 +1,6 @@
 # 📖 API Reference
 
-All examples assume `use Sportmonks\Football\FootballApi;`.
+All examples assume `use Kash\Sportmonks\Football\FootballApi;`.
 
 ## Contents
 

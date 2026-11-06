@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sportmonks\Football;
+namespace Kash\Sportmonks\Football;
 
 use DateTimeImmutable;
-use Sportmonks\Football\Exception\InvalidDateFormatException;
+use Kash\Sportmonks\Football\Exception\InvalidDateFormatException;
 
 class FootballApiHelper
 {

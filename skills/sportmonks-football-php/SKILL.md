@@ -6,7 +6,7 @@ description: Write or debug PHP integrations with the Sportmonks Football API us
 # Sportmonks Football PHP
 
 PHP client for the Sportmonks Football API v3. Every endpoint is reached through the static
-`Sportmonks\Football\FootballApi` facade.
+`Kash\Sportmonks\Football\FootballApi` facade.
 
 ## Setup
 
@@ -15,13 +15,13 @@ PHP client for the Sportmonks Football API v3. Every endpoint is reached through
 - A missing token throws `InvalidArgumentException`. Never hardcode the token.
 - If the app doesn't populate `$_ENV` (for example, with cached framework config), or needs custom HTTP
   behavior, construct the endpoint directly. Every argument is optional and falls back to `$_ENV`:
-  `new Sportmonks\Football\Endpoint\Fixtures(token: $token, timezone: 'UTC', httpClient: $httpClient)`.
+  `new Kash\Sportmonks\Football\Endpoint\Fixtures(token: $token, timezone: 'UTC', httpClient: $httpClient)`.
 - Pass a Symfony `RetryableHttpClient` to retry 429 responses, or a `MockHttpClient` in tests.
 
 ## Making requests
 
 ```php
-use Sportmonks\Football\FootballApi;
+use Kash\Sportmonks\Football\FootballApi;
 
 $response = FootballApi::fixtures()
     ->setIncludes(['participants', 'scores', 'events'])
@@ -70,8 +70,8 @@ while (true) {
 
 | Exception | When |
 | --- | --- |
-| `Sportmonks\Football\Exception\ApiRequestException` | HTTP error, network failure, or a response that isn't a JSON object. For HTTP errors, `getCode()` is the status (401/403 token or plan, 404 not found, 429 rate limited: back off and retry), and the message includes Sportmonks' explanation when one is returned. Network failures (DNS, timeout, connection) have no status and usually code `0`. |
-| `Sportmonks\Football\Exception\InvalidDateFormatException` | A date argument is not `Y-m-d`. |
+| `Kash\Sportmonks\Football\Exception\ApiRequestException` | HTTP error, network failure, or a response that isn't a JSON object. For HTTP errors, `getCode()` is the status (401/403 token or plan, 404 not found, 429 rate limited: back off and retry), and the message includes Sportmonks' explanation when one is returned. Network failures (DNS, timeout, connection) have no status and usually code `0`. |
+| `Kash\Sportmonks\Football\Exception\InvalidDateFormatException` | A date argument is not `Y-m-d`. |
 | `InvalidArgumentException` | No API token is set. |
 
 ## Finding IDs
@@ -95,4 +95,4 @@ Most methods take numeric IDs. Resolve names with `search()` first (for example
   for a Markdown version with the available includes, filters, and response fields.
 - Sportmonks docs index for agents: https://docs.sportmonks.com/v3/llms.txt
 - If an endpoint the user needs is not in this client, say so. Don't invent methods. Endpoint classes are `final`;
-  to add a missing endpoint, extend `Sportmonks\Football\FootballClient` and call `$this->call('path')`.
+  to add a missing endpoint, extend `Kash\Sportmonks\Football\FootballClient` and call `$this->call('path')`.
