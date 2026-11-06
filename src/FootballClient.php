@@ -13,7 +13,7 @@ use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class FootballClient
+abstract class FootballClient
 {
     protected const string BASE_URI = 'https://api.sportmonks.com/v3/football/';
 
@@ -167,7 +167,7 @@ class FootballClient
         return $this;
     }
 
-    protected function cursorValue(?string $cursor): ?string
+    private function cursorValue(?string $cursor): ?string
     {
         $cursor = trim((string) $cursor);
 

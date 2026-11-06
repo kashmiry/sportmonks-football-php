@@ -38,7 +38,7 @@ use Kash\Sportmonks\Football\Endpoint\TvStations;
 use Kash\Sportmonks\Football\Endpoint\Types;
 use Kash\Sportmonks\Football\Endpoint\Venues;
 
-class FootballApi
+final class FootballApi
 {
     public static function bookmakers(): Bookmakers
     {

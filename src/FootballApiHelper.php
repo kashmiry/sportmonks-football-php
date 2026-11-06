@@ -7,7 +7,10 @@ namespace Kash\Sportmonks\Football;
 use DateTimeImmutable;
 use Kash\Sportmonks\Football\Exception\InvalidDateFormatException;
 
-class FootballApiHelper
+/**
+ * @internal
+ */
+final class FootballApiHelper
 {
     /**
      * Validates a date string strictly against the format and returns it normalized.
