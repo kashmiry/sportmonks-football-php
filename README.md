@@ -10,23 +10,22 @@ Actively maintained PHP client for the [Sportmonks Football API](https://docs.sp
 
 ## ⚙️ Configuration
 
-The client reads its settings from `$_ENV`:
-
 | Variable | Required | Description |
 | --- | --- | --- |
 | `SPORTMONKS_API_TOKEN` | Yes | Your Sportmonks API token |
 | `SPORTMONKS_TIMEZONE` | No | Timezone for returned dates (default: `UTC`) |
 
-```php
-require __DIR__ . '/vendor/autoload.php';
+**From `$_ENV`** (default): set the variables once, and every call uses them.
 
+```php
 $_ENV['SPORTMONKS_API_TOKEN'] = getenv('SPORTMONKS_API_TOKEN') ?: '';
 $_ENV['SPORTMONKS_TIMEZONE'] = 'Asia/Riyadh';
 ```
 
-Using a `.env` file? [`symfony/dotenv`](https://symfony.com/doc/current/components/dotenv.html) loads it into `$_ENV` for you.
+> [!TIP]
+> Using a `.env` file? [`symfony/dotenv`](https://symfony.com/doc/current/components/dotenv.html) loads it into `$_ENV` for you.
 
-You can also pass settings directly to an endpoint, including your own [Symfony HTTP client](https://symfony.com/doc/current/http_client.html) for timeouts, retries, or tests:
+**Per endpoint:** pass settings to the constructor. Each one is optional and falls back to `$_ENV`. Use `httpClient` to bring your own [Symfony HTTP client](https://symfony.com/doc/current/http_client.html) for timeouts, retries, or tests.
 
 ```php
 use Kash\Sportmonks\Football\Endpoint\Fixtures;
@@ -35,6 +34,8 @@ $fixtures = new Fixtures(token: $token, timezone: 'Asia/Riyadh', httpClient: $ht
 ```
 
 ## 🚀 Usage
+
+Pick an endpoint from `FootballApi`, chain any options, then make the request:
 
 ```php
 use Kash\Sportmonks\Football\FootballApi;
@@ -48,7 +49,10 @@ foreach ($response->data as $fixture) {
 }
 ```
 
-Each call returns the decoded JSON response, with results in `$response->data` and paging info in `$response->pagination`.
+Every call returns the decoded JSON response:
+
+- `$response->data`: the results
+- `$response->pagination`: paging info, when available
 
 📖 See the [API reference](docs/Reference.md) for pagination, includes, filters, and all endpoints.
 
@@ -58,9 +62,10 @@ The package ships an [agent skill](skills/sportmonks-football-php/SKILL.md) that
 
 ```bash
 npx skills add kashmiry/sportmonks-football-php
-```
 
-Or copy it manually: `vendor/kashmiry/sportmonks-football-php/skills/sportmonks-football-php` → `.agents/skills/`.
+# or directly copy it from the installed package
+mkdir -p .agents/skills && cp -r vendor/kashmiry/sportmonks-football-php/skills/* .agents/skills/
+```
 
 Sportmonks also offers [AI docs and an MCP server](https://docs.sportmonks.com/v3/sportmonks-ai-docs) for exploring the API.
 
