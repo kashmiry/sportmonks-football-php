@@ -7,6 +7,7 @@ namespace Kash\Sportmonks\Football;
 use InvalidArgumentException;
 use JsonException;
 use Kash\Sportmonks\Football\Exception\ApiRequestException;
+use SensitiveParameter;
 use stdClass;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
@@ -30,6 +31,7 @@ abstract class FootballClient
      * @param HttpClientInterface|null $httpClient Optional client for timeouts, retries, proxies, or tests.
      */
     public function __construct(
+        #[SensitiveParameter]
         ?string $token = null,
         ?string $timezone = null,
         ?HttpClientInterface $httpClient = null,
@@ -49,6 +51,16 @@ abstract class FootballClient
         }
 
         $this->client = ($httpClient ?? HttpClient::create())->withOptions(['base_uri' => static::BASE_URI]);
+    }
+
+    /**
+     * Keeps the API token out of var_dump(), print_r() and debugger output.
+     *
+     * @return array<string, mixed>
+     */
+    public function __debugInfo(): array
+    {
+        return ['apiToken' => '[redacted]', 'query' => $this->query];
     }
 
     private function env(string $name): ?string

@@ -39,6 +39,17 @@ class FootballClientAuthTest extends TestCase
         $this->assertContains('Authorization: ' . self::TOKEN, $headers);
     }
 
+    public function testTokenIsHiddenFromDebugOutput(): void
+    {
+        $client = new Endpoint\Bookmakers(token: self::TOKEN, httpClient: new MockHttpClient());
+
+        ob_start();
+        var_dump($client);
+        $dumped = ob_get_clean() . print_r($client, true);
+
+        $this->assertStringNotContainsString(self::TOKEN, $dumped);
+    }
+
     public function testTokenIsNotLeakedInExceptionMessage(): void
     {
         $_ENV['SPORTMONKS_API_TOKEN'] = self::TOKEN;
