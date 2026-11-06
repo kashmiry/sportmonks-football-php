@@ -16,8 +16,7 @@ final class TvStations extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'tv-stations';
-        return $this->call($url);
+        return $this->call('tv-stations');
     }
 
     /**
@@ -26,8 +25,7 @@ final class TvStations extends FootballClient
      */
     public function getById(int $tvStationId): stdClass
     {
-        $url = "tv-stations/{$tvStationId}";
-        return $this->call($url);
+        return $this->call("tv-stations/{$tvStationId}");
     }
 
     /**
@@ -36,7 +34,6 @@ final class TvStations extends FootballClient
      */
     public function getByFixtureId(int $fixtureId): stdClass
     {
-        $url = "tv-stations/fixtures/{$fixtureId}";
-        return $this->call($url);
+        return $this->call("tv-stations/fixtures/{$fixtureId}");
     }
 }

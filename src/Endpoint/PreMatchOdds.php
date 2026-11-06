@@ -16,8 +16,7 @@ final class PreMatchOdds extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'odds/pre-match';
-        return $this->call($url);
+        return $this->call('odds/pre-match');
     }
 
     /**
@@ -26,8 +25,7 @@ final class PreMatchOdds extends FootballClient
      */
     public function getByFixtureId(int $fixtureId): stdClass
     {
-        $url = "odds/pre-match/fixtures/{$fixtureId}";
-        return $this->call($url);
+        return $this->call("odds/pre-match/fixtures/{$fixtureId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class PreMatchOdds extends FootballClient
      */
     public function getByFixtureAndBookmakerId(int $fixtureId, int $bookmakerId): stdClass
     {
-        $url = "odds/pre-match/fixtures/{$fixtureId}/bookmakers/{$bookmakerId}";
-        return $this->call($url);
+        return $this->call("odds/pre-match/fixtures/{$fixtureId}/bookmakers/{$bookmakerId}");
     }
 
     /**
@@ -46,8 +43,7 @@ final class PreMatchOdds extends FootballClient
      */
     public function getByFixtureAndMarketId(int $fixtureId, int $marketId): stdClass
     {
-        $url = "odds/pre-match/fixtures/{$fixtureId}/markets/{$marketId}";
-        return $this->call($url);
+        return $this->call("odds/pre-match/fixtures/{$fixtureId}/markets/{$marketId}");
     }
 
     /**
@@ -56,7 +52,6 @@ final class PreMatchOdds extends FootballClient
      */
     public function getLastUpdated(): stdClass
     {
-        $url = 'odds/pre-match/latest';
-        return $this->call($url);
+        return $this->call('odds/pre-match/latest');
     }
 }

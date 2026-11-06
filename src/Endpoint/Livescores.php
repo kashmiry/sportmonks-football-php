@@ -16,8 +16,7 @@ final class Livescores extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'livescores';
-        return $this->call($url);
+        return $this->call('livescores');
     }
 
     /**
@@ -26,8 +25,7 @@ final class Livescores extends FootballClient
      */
     public function inplay(): stdClass
     {
-        $url = 'livescores/inplay';
-        return $this->call($url);
+        return $this->call('livescores/inplay');
     }
 
     /**
@@ -36,7 +34,6 @@ final class Livescores extends FootballClient
      */
     public function latest(): stdClass
     {
-        $url = 'livescores/latest';
-        return $this->call($url);
+        return $this->call('livescores/latest');
     }
 }

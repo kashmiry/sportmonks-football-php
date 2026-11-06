@@ -18,8 +18,7 @@ final class Transfers extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'transfers';
-        return $this->call($url);
+        return $this->call('transfers');
     }
 
     /**
@@ -28,8 +27,7 @@ final class Transfers extends FootballClient
      */
     public function getById(int $transferId): stdClass
     {
-        $url = "transfers/{$transferId}";
-        return $this->call($url);
+        return $this->call("transfers/{$transferId}");
     }
 
     /**
@@ -38,8 +36,7 @@ final class Transfers extends FootballClient
      */
     public function latest(): stdClass
     {
-        $url = 'transfers/latest';
-        return $this->call($url);
+        return $this->call('transfers/latest');
     }
 
     /**
@@ -50,9 +47,8 @@ final class Transfers extends FootballClient
     public function getByDateRange(string $dateFrom, string $dateTo): stdClass
     {
         $dateFrom = FootballApiHelper::verifyDate($dateFrom);
-        $dateTo   = FootballApiHelper::verifyDate($dateTo);
-        $url      = "transfers/between/{$dateFrom}/{$dateTo}";
-        return $this->call($url);
+        $dateTo = FootballApiHelper::verifyDate($dateTo);
+        return $this->call("transfers/between/{$dateFrom}/{$dateTo}");
     }
 
     /**
@@ -61,8 +57,7 @@ final class Transfers extends FootballClient
      */
     public function getByTeamId(int $teamId): stdClass
     {
-        $url = "transfers/teams/{$teamId}";
-        return $this->call($url);
+        return $this->call("transfers/teams/{$teamId}");
     }
 
     /**
@@ -71,7 +66,6 @@ final class Transfers extends FootballClient
      */
     public function getByPlayerId(int $playerId): stdClass
     {
-        $url = "transfers/players/{$playerId}";
-        return $this->call($url);
+        return $this->call("transfers/players/{$playerId}");
     }
 }

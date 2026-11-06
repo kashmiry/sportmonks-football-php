@@ -18,8 +18,7 @@ final class Bookmakers extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'bookmakers';
-        return $this->call($url);
+        return $this->call('bookmakers');
     }
 
     /**
@@ -28,8 +27,7 @@ final class Bookmakers extends FootballClient
      */
     public function getById(int $bookmakerId): stdClass
     {
-        $url = "bookmakers/{$bookmakerId}";
-        return $this->call($url);
+        return $this->call("bookmakers/{$bookmakerId}");
     }
 
     /**
@@ -38,8 +36,7 @@ final class Bookmakers extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'bookmakers/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('bookmakers/search/' . rawurlencode($searchQuery));
     }
 
     /**
@@ -48,7 +45,6 @@ final class Bookmakers extends FootballClient
      */
     public function getByFixtureId(int $fixtureId): stdClass
     {
-        $url = "bookmakers/fixtures/{$fixtureId}";
-        return $this->call($url);
+        return $this->call("bookmakers/fixtures/{$fixtureId}");
     }
 }

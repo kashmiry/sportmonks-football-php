@@ -18,8 +18,7 @@ final class Types extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'types';
-        return $this->call($url);
+        return $this->call('types');
     }
 
     /**
@@ -28,8 +27,7 @@ final class Types extends FootballClient
      */
     public function getById(int $typeId): stdClass
     {
-        $url = "types/{$typeId}";
-        return $this->call($url);
+        return $this->call("types/{$typeId}");
     }
 
     /**
@@ -38,7 +36,6 @@ final class Types extends FootballClient
      */
     public function getByEntity(): stdClass
     {
-        $url = 'types/entities';
-        return $this->call($url);
+        return $this->call('types/entities');
     }
 }

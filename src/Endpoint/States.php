@@ -16,8 +16,7 @@ final class States extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'states';
-        return $this->call($url);
+        return $this->call('states');
     }
 
     /**
@@ -26,7 +25,6 @@ final class States extends FootballClient
      */
     public function getById(int $stateId): stdClass
     {
-        $url = "states/{$stateId}";
-        return $this->call($url);
+        return $this->call("states/{$stateId}");
     }
 }

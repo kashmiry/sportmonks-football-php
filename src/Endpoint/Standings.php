@@ -16,8 +16,7 @@ final class Standings extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'standings';
-        return $this->call($url);
+        return $this->call('standings');
     }
 
     /**
@@ -26,8 +25,7 @@ final class Standings extends FootballClient
      */
     public function getBySeasonId(int $seasonId): stdClass
     {
-        $url = "standings/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("standings/seasons/{$seasonId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class Standings extends FootballClient
      */
     public function getByRoundId(int $roundId): stdClass
     {
-        $url = "standings/rounds/{$roundId}";
-        return $this->call($url);
+        return $this->call("standings/rounds/{$roundId}");
     }
 
     /**
@@ -46,8 +43,7 @@ final class Standings extends FootballClient
      */
     public function getCorrectionsBySeasonId(int $seasonId): stdClass
     {
-        $url = "standings/corrections/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("standings/corrections/seasons/{$seasonId}");
     }
 
     /**
@@ -56,7 +52,6 @@ final class Standings extends FootballClient
      */
     public function getLiveByLeagueId(int $leagueId): stdClass
     {
-        $url = "standings/live/leagues/{$leagueId}";
-        return $this->call($url);
+        return $this->call("standings/live/leagues/{$leagueId}");
     }
 }

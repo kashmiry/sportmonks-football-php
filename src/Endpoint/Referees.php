@@ -16,8 +16,7 @@ final class Referees extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'referees';
-        return $this->call($url);
+        return $this->call('referees');
     }
 
     /**
@@ -26,8 +25,7 @@ final class Referees extends FootballClient
      */
     public function getById(int $refereeId): stdClass
     {
-        $url = "referees/{$refereeId}";
-        return $this->call($url);
+        return $this->call("referees/{$refereeId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class Referees extends FootballClient
      */
     public function getByCountryId(int $countryId): stdClass
     {
-        $url = "referees/countries/{$countryId}";
-        return $this->call($url);
+        return $this->call("referees/countries/{$countryId}");
     }
 
     /**
@@ -46,7 +43,6 @@ final class Referees extends FootballClient
      */
     public function getBySeasonId(int $seasonId): stdClass
     {
-        $url = "referees/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("referees/seasons/{$seasonId}");
     }
 }

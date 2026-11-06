@@ -16,8 +16,7 @@ final class Topscorers extends FootballClient
      */
     public function getBySeasonId(int $seasonId): stdClass
     {
-        $url = "topscorers/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("topscorers/seasons/{$seasonId}");
     }
 
     /**
@@ -26,7 +25,6 @@ final class Topscorers extends FootballClient
      */
     public function getByStageId(int $stageId): stdClass
     {
-        $url = "topscorers/stages/{$stageId}";
-        return $this->call($url);
+        return $this->call("topscorers/stages/{$stageId}");
     }
 }

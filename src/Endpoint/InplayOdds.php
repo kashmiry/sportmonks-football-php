@@ -16,8 +16,7 @@ final class InplayOdds extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'odds/inplay';
-        return $this->call($url);
+        return $this->call('odds/inplay');
     }
 
     /**
@@ -26,8 +25,7 @@ final class InplayOdds extends FootballClient
      */
     public function getByFixtureId(int $fixtureId): stdClass
     {
-        $url = "odds/inplay/fixtures/{$fixtureId}";
-        return $this->call($url);
+        return $this->call("odds/inplay/fixtures/{$fixtureId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class InplayOdds extends FootballClient
      */
     public function getByFixtureAndBookmakerId(int $fixtureId, int $bookmakerId): stdClass
     {
-        $url = "odds/inplay/fixtures/{$fixtureId}/bookmakers/{$bookmakerId}";
-        return $this->call($url);
+        return $this->call("odds/inplay/fixtures/{$fixtureId}/bookmakers/{$bookmakerId}");
     }
 
     /**
@@ -46,8 +43,7 @@ final class InplayOdds extends FootballClient
      */
     public function getByFixtureAndMarketId(int $fixtureId, int $marketId): stdClass
     {
-        $url = "odds/inplay/fixtures/{$fixtureId}/markets/{$marketId}";
-        return $this->call($url);
+        return $this->call("odds/inplay/fixtures/{$fixtureId}/markets/{$marketId}");
     }
 
     /**
@@ -56,7 +52,6 @@ final class InplayOdds extends FootballClient
      */
     public function getLastUpdated(): stdClass
     {
-        $url = 'odds/inplay/latest';
-        return $this->call($url);
+        return $this->call('odds/inplay/latest');
     }
 }

@@ -16,8 +16,7 @@ final class Rivals extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'rivals';
-        return $this->call($url);
+        return $this->call('rivals');
     }
 
     /**
@@ -26,7 +25,6 @@ final class Rivals extends FootballClient
      */
     public function getByTeamId(int $teamId): stdClass
     {
-        $url = "rivals/teams/{$teamId}";
-        return $this->call($url);
+        return $this->call("rivals/teams/{$teamId}");
     }
 }

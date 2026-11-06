@@ -18,8 +18,7 @@ final class Leagues extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'leagues';
-        return $this->call($url);
+        return $this->call('leagues');
     }
 
     /**
@@ -28,8 +27,7 @@ final class Leagues extends FootballClient
      */
     public function getById(int $leagueId): stdClass
     {
-        $url = "leagues/{$leagueId}";
-        return $this->call($url);
+        return $this->call("leagues/{$leagueId}");
     }
 
     /**
@@ -38,8 +36,7 @@ final class Leagues extends FootballClient
      */
     public function live(): stdClass
     {
-        $url = 'leagues/live';
-        return $this->call($url);
+        return $this->call('leagues/live');
     }
 
     /**
@@ -50,8 +47,7 @@ final class Leagues extends FootballClient
     public function getByFixtureDate(string $date): stdClass
     {
         $date = FootballApiHelper::verifyDate($date);
-        $url = "leagues/date/{$date}";
-        return $this->call($url);
+        return $this->call("leagues/date/{$date}");
     }
 
     /**
@@ -60,8 +56,7 @@ final class Leagues extends FootballClient
      */
     public function getByCountryId(int $countryId): stdClass
     {
-        $url = "leagues/countries/{$countryId}";
-        return $this->call($url);
+        return $this->call("leagues/countries/{$countryId}");
     }
 
     /**
@@ -70,8 +65,7 @@ final class Leagues extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'leagues/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('leagues/search/' . rawurlencode($searchQuery));
     }
 
     /**
@@ -80,8 +74,7 @@ final class Leagues extends FootballClient
      */
     public function getByTeamId(int $teamId): stdClass
     {
-        $url = "leagues/teams/{$teamId}";
-        return $this->call($url);
+        return $this->call("leagues/teams/{$teamId}");
     }
 
     /**
@@ -90,7 +83,6 @@ final class Leagues extends FootballClient
      */
     public function getCurrentByTeamId(int $teamId): stdClass
     {
-        $url = "leagues/teams/{$teamId}/current";
-        return $this->call($url);
+        return $this->call("leagues/teams/{$teamId}/current");
     }
 }

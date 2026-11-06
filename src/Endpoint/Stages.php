@@ -16,8 +16,7 @@ final class Stages extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'stages';
-        return $this->call($url);
+        return $this->call('stages');
     }
 
     /**
@@ -26,8 +25,7 @@ final class Stages extends FootballClient
      */
     public function getById(int $stageId): stdClass
     {
-        $url = "stages/{$stageId}";
-        return $this->call($url);
+        return $this->call("stages/{$stageId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class Stages extends FootballClient
      */
     public function getBySeasonId(int $seasonId): stdClass
     {
-        $url = "stages/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("stages/seasons/{$seasonId}");
     }
 
     /**
@@ -46,7 +43,6 @@ final class Stages extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'stages/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('stages/search/' . rawurlencode($searchQuery));
     }
 }

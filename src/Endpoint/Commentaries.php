@@ -16,8 +16,7 @@ final class Commentaries extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'commentaries';
-        return $this->call($url);
+        return $this->call('commentaries');
     }
 
     /**
@@ -26,7 +25,6 @@ final class Commentaries extends FootballClient
      */
     public function getByFixtureId(int $fixtureId): stdClass
     {
-        $url = "commentaries/fixtures/{$fixtureId}";
-        return $this->call($url);
+        return $this->call("commentaries/fixtures/{$fixtureId}");
     }
 }

@@ -18,8 +18,7 @@ final class Regions extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'regions';
-        return $this->call($url);
+        return $this->call('regions');
     }
 
     /**
@@ -28,8 +27,7 @@ final class Regions extends FootballClient
      */
     public function getById(int $regionId): stdClass
     {
-        $url = "regions/{$regionId}";
-        return $this->call($url);
+        return $this->call("regions/{$regionId}");
     }
 
     /**
@@ -38,7 +36,6 @@ final class Regions extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'regions/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('regions/search/' . rawurlencode($searchQuery));
     }
 }

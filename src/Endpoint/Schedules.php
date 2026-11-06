@@ -16,8 +16,7 @@ final class Schedules extends FootballClient
      */
     public function getBySeasonId(int $seasonId): stdClass
     {
-        $url = "schedules/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("schedules/seasons/{$seasonId}");
     }
 
     /**
@@ -26,8 +25,7 @@ final class Schedules extends FootballClient
      */
     public function getByTeamId(int $teamId): stdClass
     {
-        $url = "schedules/teams/{$teamId}";
-        return $this->call($url);
+        return $this->call("schedules/teams/{$teamId}");
     }
 
 
@@ -37,7 +35,6 @@ final class Schedules extends FootballClient
      */
     public function getBySeasonAndTeamId(int $seasonId, int $teamId): stdClass
     {
-        $url = "schedules/seasons/{$seasonId}/teams/{$teamId}";
-        return $this->call($url);
+        return $this->call("schedules/seasons/{$seasonId}/teams/{$teamId}");
     }
 }

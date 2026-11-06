@@ -16,8 +16,7 @@ final class Rounds extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'rounds';
-        return $this->call($url);
+        return $this->call('rounds');
     }
 
     /**
@@ -26,8 +25,7 @@ final class Rounds extends FootballClient
      */
     public function getById(int $roundId): stdClass
     {
-        $url = "rounds/{$roundId}";
-        return $this->call($url);
+        return $this->call("rounds/{$roundId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class Rounds extends FootballClient
      */
     public function getBySeasonId(int $seasonId): stdClass
     {
-        $url = "rounds/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("rounds/seasons/{$seasonId}");
     }
 
     /**
@@ -46,7 +43,6 @@ final class Rounds extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'rounds/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('rounds/search/' . rawurlencode($searchQuery));
     }
 }

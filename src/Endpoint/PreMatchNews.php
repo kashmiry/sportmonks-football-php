@@ -16,8 +16,7 @@ final class PreMatchNews extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'news/pre-match';
-        return $this->call($url);
+        return $this->call('news/pre-match');
     }
 
     /**
@@ -26,8 +25,7 @@ final class PreMatchNews extends FootballClient
      */
     public function getBySeasonId(int $seasonId): stdClass
     {
-        $url = "news/pre-match/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("news/pre-match/seasons/{$seasonId}");
     }
 
     /**
@@ -36,7 +34,6 @@ final class PreMatchNews extends FootballClient
      */
     public function upcomingFixtures(): stdClass
     {
-        $url = 'news/pre-match/upcoming';
-        return $this->call($url);
+        return $this->call('news/pre-match/upcoming');
     }
 }

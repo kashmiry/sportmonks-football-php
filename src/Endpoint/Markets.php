@@ -18,8 +18,7 @@ final class Markets extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'markets';
-        return $this->call($url);
+        return $this->call('markets');
     }
 
     /**
@@ -28,8 +27,7 @@ final class Markets extends FootballClient
      */
     public function getById(int $marketId): stdClass
     {
-        $url = "markets/{$marketId}";
-        return $this->call($url);
+        return $this->call("markets/{$marketId}");
     }
 
     /**
@@ -38,7 +36,6 @@ final class Markets extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'markets/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('markets/search/' . rawurlencode($searchQuery));
     }
 }

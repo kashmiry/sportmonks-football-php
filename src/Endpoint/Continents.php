@@ -18,8 +18,7 @@ final class Continents extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'continents';
-        return $this->call($url);
+        return $this->call('continents');
     }
 
     /**
@@ -28,7 +27,6 @@ final class Continents extends FootballClient
      */
     public function getById(int $continentId): stdClass
     {
-        $url = "continents/{$continentId}";
-        return $this->call($url);
+        return $this->call("continents/{$continentId}");
     }
 }

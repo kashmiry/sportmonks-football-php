@@ -18,7 +18,6 @@ final class Filters extends FootballClient
      */
     public function allEntity(): stdClass
     {
-        $url = 'filters/entity';
-        return $this->call($url);
+        return $this->call('filters/entity');
     }
 }

@@ -18,8 +18,7 @@ final class Fixtures extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'fixtures';
-        return $this->call($url);
+        return $this->call('fixtures');
     }
 
     /**
@@ -28,8 +27,7 @@ final class Fixtures extends FootballClient
      */
     public function getById(int $fixtureId): stdClass
     {
-        $url = "fixtures/{$fixtureId}";
-        return $this->call($url);
+        return $this->call("fixtures/{$fixtureId}");
     }
 
     /**
@@ -39,8 +37,7 @@ final class Fixtures extends FootballClient
      */
     public function getByMultipleIds(array $fixtureIds): stdClass
     {
-        $url = 'fixtures/multi/' . implode(',', self::cleanList($fixtureIds));
-        return $this->call($url);
+        return $this->call('fixtures/multi/' . implode(',', self::cleanList($fixtureIds)));
     }
 
     /**
@@ -51,8 +48,7 @@ final class Fixtures extends FootballClient
     public function getByDate(string $date): stdClass
     {
         $date = FootballApiHelper::verifyDate($date);
-        $url  = "fixtures/date/{$date}";
-        return $this->call($url);
+        return $this->call("fixtures/date/{$date}");
     }
 
     /**
@@ -63,9 +59,8 @@ final class Fixtures extends FootballClient
     public function getByDateRange(string $dateFrom, string $dateTo): stdClass
     {
         $dateFrom = FootballApiHelper::verifyDate($dateFrom);
-        $dateTo   = FootballApiHelper::verifyDate($dateTo);
-        $url      = "fixtures/between/{$dateFrom}/{$dateTo}";
-        return $this->call($url);
+        $dateTo = FootballApiHelper::verifyDate($dateTo);
+        return $this->call("fixtures/between/{$dateFrom}/{$dateTo}");
     }
 
     /**
@@ -76,9 +71,8 @@ final class Fixtures extends FootballClient
     public function getByDateRangeForTeam(string $dateFrom, string $dateTo, int $teamId): stdClass
     {
         $dateFrom = FootballApiHelper::verifyDate($dateFrom);
-        $dateTo   = FootballApiHelper::verifyDate($dateTo);
-        $url      = "fixtures/between/{$dateFrom}/{$dateTo}/{$teamId}";
-        return $this->call($url);
+        $dateTo = FootballApiHelper::verifyDate($dateTo);
+        return $this->call("fixtures/between/{$dateFrom}/{$dateTo}/{$teamId}");
     }
 
     /**
@@ -87,8 +81,7 @@ final class Fixtures extends FootballClient
      */
     public function getHeadToHead(int $teamId1, int $teamId2): stdClass
     {
-        $url = "fixtures/head-to-head/{$teamId1}/{$teamId2}";
-        return $this->call($url);
+        return $this->call("fixtures/head-to-head/{$teamId1}/{$teamId2}");
     }
 
     /**
@@ -97,8 +90,7 @@ final class Fixtures extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'fixtures/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('fixtures/search/' . rawurlencode($searchQuery));
     }
 
     /**
@@ -107,8 +99,7 @@ final class Fixtures extends FootballClient
      */
     public function getUpcomingByMarketId(int $marketId): stdClass
     {
-        $url = "fixtures/upcoming/markets/{$marketId}";
-        return $this->call($url);
+        return $this->call("fixtures/upcoming/markets/{$marketId}");
     }
     /**
      * @throws ApiRequestException
@@ -116,7 +107,6 @@ final class Fixtures extends FootballClient
      */
     public function getLastUpdated(): stdClass
     {
-        $url = 'fixtures/latest';
-        return $this->call($url);
+        return $this->call('fixtures/latest');
     }
 }

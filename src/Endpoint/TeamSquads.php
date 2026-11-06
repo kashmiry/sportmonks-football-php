@@ -16,8 +16,7 @@ final class TeamSquads extends FootballClient
      */
     public function getByTeamId(int $teamId): stdClass
     {
-        $url = "squads/teams/{$teamId}";
-        return $this->call($url);
+        return $this->call("squads/teams/{$teamId}");
     }
 
     /**
@@ -26,7 +25,6 @@ final class TeamSquads extends FootballClient
      */
     public function getByTeamAndSeasonId(int $teamId, int $seasonId): stdClass
     {
-        $url = "squads/seasons/{$seasonId}/teams/{$teamId}";
-        return $this->call($url);
+        return $this->call("squads/seasons/{$seasonId}/teams/{$teamId}");
     }
 }

@@ -16,8 +16,7 @@ final class Venues extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'venues';
-        return $this->call($url);
+        return $this->call('venues');
     }
 
     /**
@@ -26,8 +25,7 @@ final class Venues extends FootballClient
      */
     public function getById(int $venueId): stdClass
     {
-        $url = "venues/{$venueId}";
-        return $this->call($url);
+        return $this->call("venues/{$venueId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class Venues extends FootballClient
      */
     public function getBySeasonId(int $seasonId): stdClass
     {
-        $url = "venues/seasons/{$seasonId}";
-        return $this->call($url);
+        return $this->call("venues/seasons/{$seasonId}");
     }
 
     /**
@@ -46,7 +43,6 @@ final class Venues extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'venues/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('venues/search/' . rawurlencode($searchQuery));
     }
 }

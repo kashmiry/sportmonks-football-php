@@ -18,8 +18,7 @@ final class My extends FootballClient
      */
     public function enrichments(): stdClass
     {
-        $url = 'enrichments';
-        return $this->call($url);
+        return $this->call('enrichments');
     }
 
     /**
@@ -28,8 +27,7 @@ final class My extends FootballClient
      */
     public function resources(): stdClass
     {
-        $url = 'resources';
-        return $this->call($url);
+        return $this->call('resources');
     }
 
     /**
@@ -38,7 +36,6 @@ final class My extends FootballClient
      */
     public function leagues(): stdClass
     {
-        $url = 'leagues';
-        return $this->call($url);
+        return $this->call('leagues');
     }
 }

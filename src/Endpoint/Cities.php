@@ -18,8 +18,7 @@ final class Cities extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'cities';
-        return $this->call($url);
+        return $this->call('cities');
     }
 
     /**
@@ -28,8 +27,7 @@ final class Cities extends FootballClient
      */
     public function getById(int $cityId): stdClass
     {
-        $url = "cities/{$cityId}";
-        return $this->call($url);
+        return $this->call("cities/{$cityId}");
     }
 
     /**
@@ -38,7 +36,6 @@ final class Cities extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'cities/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('cities/search/' . rawurlencode($searchQuery));
     }
 }

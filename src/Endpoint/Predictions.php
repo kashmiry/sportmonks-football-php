@@ -16,8 +16,7 @@ final class Predictions extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'predictions/probabilities';
-        return $this->call($url);
+        return $this->call('predictions/probabilities');
     }
 
     /**
@@ -26,8 +25,7 @@ final class Predictions extends FootballClient
      */
     public function getPredictabilityByLeagueId(int $leagueId): stdClass
     {
-        $url = "predictions/predictability/leagues/{$leagueId}";
-        return $this->call($url);
+        return $this->call("predictions/predictability/leagues/{$leagueId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class Predictions extends FootballClient
      */
     public function getPredictabilityByFixtureId(int $fixtureId): stdClass
     {
-        $url = "predictions/probabilities/fixtures/{$fixtureId}";
-        return $this->call($url);
+        return $this->call("predictions/probabilities/fixtures/{$fixtureId}");
     }
 
     /**
@@ -46,7 +43,6 @@ final class Predictions extends FootballClient
      */
     public function valueBets(): stdClass
     {
-        $url = 'predictions/value-bets/';
-        return $this->call($url);
+        return $this->call('predictions/value-bets/');
     }
 }

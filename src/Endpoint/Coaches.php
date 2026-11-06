@@ -16,8 +16,7 @@ final class Coaches extends FootballClient
      */
     public function all(): stdClass
     {
-        $url = 'coaches';
-        return $this->call($url);
+        return $this->call('coaches');
     }
 
     /**
@@ -26,8 +25,7 @@ final class Coaches extends FootballClient
      */
     public function getById(int $coachId): stdClass
     {
-        $url = "coaches/{$coachId}";
-        return $this->call($url);
+        return $this->call("coaches/{$coachId}");
     }
 
     /**
@@ -36,8 +34,7 @@ final class Coaches extends FootballClient
      */
     public function getByCountryId(int $countryId): stdClass
     {
-        $url = "coaches/countries/{$countryId}";
-        return $this->call($url);
+        return $this->call("coaches/countries/{$countryId}");
     }
 
     /**
@@ -46,8 +43,7 @@ final class Coaches extends FootballClient
      */
     public function search(string $searchQuery): stdClass
     {
-        $url = 'coaches/search/' . rawurlencode($searchQuery);
-        return $this->call($url);
+        return $this->call('coaches/search/' . rawurlencode($searchQuery));
     }
 
     /**
@@ -56,7 +52,6 @@ final class Coaches extends FootballClient
      */
     public function getLastUpdated(): stdClass
     {
-        $url = 'coaches/latest';
-        return $this->call($url);
+        return $this->call('coaches/latest');
     }
 }
