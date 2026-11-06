@@ -10,6 +10,7 @@ PHP client for the Sportmonks Football API v3. Every endpoint is reached through
 
 ## Setup
 
+- If the package isn't in `composer.json` yet, install it with `composer require kashmiry/sportmonks-football-php`.
 - The client reads `$_ENV['SPORTMONKS_API_TOKEN']` (required) and `$_ENV['SPORTMONKS_TIMEZONE']`
   (optional, defaults to UTC) when each endpoint object is created. Set them before calling `FootballApi`.
 - A missing token throws `InvalidArgumentException`. Never hardcode the token.

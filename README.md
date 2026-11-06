@@ -1,12 +1,24 @@
 # ⚽ Sportmonks Football PHP
 
+[![Tests](https://github.com/kashmiry/sportmonks-football-php/actions/workflows/tests.yml/badge.svg)](https://github.com/kashmiry/sportmonks-football-php/actions/workflows/tests.yml)
+[![Latest Version](https://img.shields.io/packagist/v/kashmiry/sportmonks-football-php?label=version)](https://packagist.org/packages/kashmiry/sportmonks-football-php)
+[![PHP Version](https://img.shields.io/packagist/dependency-v/kashmiry/sportmonks-football-php/php?label=PHP)](https://packagist.org/packages/kashmiry/sportmonks-football-php)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-brightgreen)](phpstan.neon)
+[![License](https://img.shields.io/packagist/l/kashmiry/sportmonks-football-php)](LICENSE)
+
 Actively maintained PHP client for the [Sportmonks Football API](https://docs.sportmonks.com/v3).
 
 ## 📋 Requirements
 
-- PHP 8.3 or later
+- PHP >= 8.3
 - A Sportmonks API token (your plan determines which endpoints you can call)
 - Sportmonks API v3
+
+## 📦 Installation
+
+```bash
+composer require kashmiry/sportmonks-football-php
+```
 
 ## ⚙️ Configuration
 
