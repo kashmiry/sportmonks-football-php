@@ -19,6 +19,7 @@ class SetupTest extends TestCase
         unset($_ENV['SPORTMONKS_API_TOKEN']);
 
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('SPORTMONKS_API_TOKEN');
         FootballApi::bookmakers();
     }
 

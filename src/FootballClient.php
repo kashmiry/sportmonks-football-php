@@ -37,7 +37,7 @@ abstract class FootballClient
         $token ??= $this->env('SPORTMONKS_API_TOKEN');
 
         if ($token === null || $token === '') {
-            throw new InvalidArgumentException('Invalid API Key Provided');
+            throw new InvalidArgumentException('Missing Sportmonks API token: set SPORTMONKS_API_TOKEN or pass $token.');
         }
 
         $this->apiToken = $token;
